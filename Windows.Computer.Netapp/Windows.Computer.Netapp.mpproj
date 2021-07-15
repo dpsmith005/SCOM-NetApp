@@ -1,0 +1,113 @@
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{eb7944a2-f692-4231-81d5-556b8943e66c}</ProjectGuid>
+    <RootNamespace>Windows.Computer.Netapp</RootNamespace>
+    <Name>Windows.Computer.Netapp</Name>
+    <ManagementPackName>Windows.Computer.Netapp</ManagementPackName>
+    <Version>1.0.0.0</Version>
+    <MpFrameworkVersion>v7.0.4</MpFrameworkVersion>
+    <MpFrameworkProfile>OM</MpFrameworkProfile>
+    <ProductVersion>1.1.0.0</ProductVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <GenerateSealed>False</GenerateSealed>
+    <Company>MyCompany</Company>
+    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
+    <DelaySigning>False</DelaySigning>
+    <AssemblyOriginatorKeyFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+    <DelaySigning>False</DelaySigning>
+    <Company>Wellspan</Company>
+    <Copyright>Copyright (c) Wellspan.  All rights reserved.</Copyright>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>C:\Users\dsmith14admin\source\repos\Windows.Computer.Netapp\WellspanKey.snk</AssemblyOriginatorKeyFile>
+    <GenerateSealed>True</GenerateSealed>
+  </PropertyGroup>
+  <ItemGroup>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Library">
+      <Alias>SC</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.Windows.Library">
+      <Alias>Windows</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Health.Library">
+      <Alias>Health</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Library">
+      <Alias>System</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Visualization.Library">
+      <Alias>Visualization</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Health Model\Monitors.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Health Model\Monitors.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Health Model\MonitorThreeStateModule.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Health Model\Netapp.Volume.Monitor.Two.State.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ManagementPack.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Folders.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Views.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Presentation\Views.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Service Model\Classes\Class1.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Service Model\Discoveries\Discoveries.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Service Model\Discoveries\Discoveries.mptg</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Health Model" />
+    <Folder Include="Service Model" />
+    <Folder Include="Presentation" />
+    <Folder Include="Service Model\Classes" />
+    <Folder Include="Service Model\Discoveries" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Health Model\Monitors.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Presentation\Views.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Service Model\Discoveries\Discoveries.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Health Model\NetAppMonitorThreeState.ps1" />
+    <EmbeddedResource Include="Health Model\Netapp.Volume.Monitor.Two.State.ps1" />
+    <EmbeddedResource Include="Service Model\Discoveries\DiscoverNetAppControllerRelationship.ps1" />
+    <EmbeddedResource Include="Service Model\Discoveries\DiscoverNetAppControllers.ps1" />
+    <EmbeddedResource Include="Service Model\Discoveries\DiscoverNetAppVolumeRelationships.ps1" />
+    <EmbeddedResource Include="Service Model\Discoveries\DiscoverNetAppVolumes.ps1" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
+</Project>

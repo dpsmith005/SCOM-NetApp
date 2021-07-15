@@ -1,0 +1,193 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        
+          <ClassType ID="Windows.Computer.Netapp.Computer" Base="Windows!Microsoft.Windows.ComputerRole" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" Extension="false">
+            <Property ID="NodeName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Controllers" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          </ClassType>
+
+          <ClassType ID="Windows.Computer.Netapp.Controller" Comment="VSAE David Smith" Accessibility="Public" Abstract="false" Base="System!System.LogicalEntity" Hosted="false" Singleton="false" Extension="false">
+            <Property ID="KeyC" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="ComputerName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Ontapi" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Version" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="ClusterName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="IpAddress" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Comment" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          </ClassType>
+        
+          <ClassType ID="Windows.Computer.Netapp.Volume" Comment="VSAE David Smith" Accessibility="Public" Abstract="false" Base="System!System.LogicalHardware" Hosted="true" Singleton="false" Extension="false">
+            <Property ID="KeyV" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Aggregate" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Available" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Dedupe" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+            <Property ID="EncryptSpecified" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="FilesTotal" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="FilesUsed" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="IsInfiniteVolume" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="JunctionPath" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="VolumeName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="NcController" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Node" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="VolState" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="TotalSize" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Used" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Vserver" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+            <Property ID="Comment" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        
+      </ClassTypes>
+      
+      <RelationshipTypes>
+
+        <RelationshipType ID="Windows.Computer.Netapp.Controllers.Relationship" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Computer" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Controller" />
+        </RelationshipType>
+
+        <RelationshipType ID="Windows.Computer.NetApp.Volume.Relationship" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Controller" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Volume" />
+        </RelationshipType>
+        
+      </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Windows.Computer.Netapp.Computer">
+          <Name>NetApp Computer Class</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="Windows.Computer.Netapp.Computer" SubElementID="NodeName">
+          <Name>NodeName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Computer" SubElementID="Controllers">
+          <Name>Controllers</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller">
+          <Name>NetApp Controller Class</Name>
+          <Description>Discovery the Netapp Controllers via Registery</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="ComputerName">
+          <Name>ComputerName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="KeyC">
+          <Name>KeyC</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="Ontapi">
+          <Name>Ontapi</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="Version">
+          <Name>Version</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="ClusterName">
+          <Name>ClusterName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="IpAddress">
+          <Name>IpAddress</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="Comment">
+          <Name>Comment</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume">
+          <Name>NetApp Volume Class</Name>
+          <Description>Discover the volumes for the controllers</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Aggregate">
+          <Name>Aggregate</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Available">
+          <Name>Available</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Dedupe">
+          <Name>Dedupe</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="EncryptSpecified">
+          <Name>EncryptSpecified</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="FilesTotal">
+          <Name>FilesTotal</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="FilesUsed">
+          <Name>FilesUsed</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="IsInfiniteVolume">
+          <Name>IsInfiniteVolume</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="JunctionPath">
+          <Name>JunctionPath</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="KeyV">
+          <Name>KeyV</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="VolumeName">
+          <Name>VolumeName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="NcController">
+          <Name>NcController</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Node">
+          <Name>Node</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="VolState">
+          <Name>VolumeState</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="TotalSize">
+          <Name>TotalSize</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Used">
+          <Name>Used</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Vserver">
+          <Name>Vserver</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Comment">
+          <Name>Comment</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="Windows.Computer.Netapp.Controllers.Relationship">
+          <Name>Netapp Computer Controller Relationship</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.NetApp.Volume.Relationship">
+          <Name>NetApp Controller Volume Relationship</Name>
+          <Description></Description>
+        </DisplayString>
+
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

@@ -1,0 +1,126 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Monitoring>
+    <Monitors>
+      <UnitMonitor ID="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b" Accessibility="Public" Enabled="true" Target=Windows.Computer.Netapp.Volume" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="PowerShellMonitoring!Community.PowerShellMonitoring.UnitMonitors.PowerShellThreeState" ConfirmDelivery="false">
+        <Category>Custom</Category>
+        <AlertSettings AlertMessage="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b_AlertMessageResourceID">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>Error</AlertSeverity>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="UIGeneratedOpStateId07bc17ee3fe1401184d503bad9e06c48" MonitorTypeStateID="Unhealthy" HealthState="Error" />
+          <OperationalState ID="UIGeneratedOpStateId7fea2b72f57d417799db21345f5529eb" MonitorTypeStateID="Warning" HealthState="Warning" />
+          <OperationalState ID="UIGeneratedOpStateId050154af4a494e2582566981ba4e8113" MonitorTypeStateID="Healthy" HealthState="Success" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>900</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>MyScript.ps1</ScriptName>
+          <ScriptBody>
+            # Any Arguments specified will be sent to the script as a single string.
+            # If you need to send multiple values, delimit them with a space, semicolon or other separator and then use split.
+            param([string]$Arguments)
+
+            $ScomAPI = New-Object -comObject "MOM.ScriptAPI"
+            $PropertyBag = $ScomAPI.CreatePropertyBag()
+
+            # Example of use below, in this case return the length of the string passed in and we'll set health state based on that.
+            # Since the health state comparison is string based in this template we'll need to create a state value and return it.
+            # Ensure you return a unique value per health state (e.g. a service status), or a unique combination of values.
+
+            $PropertyBag.AddValue("MessageText",$Arguments)
+            $PropertyBag.AddValue("Length",$Arguments.length)
+
+            if($Arguments.length -gt 10) {
+            $PropertyBag.AddValue("State","OverUpperThreshold")
+            }
+            elseif($Arguments.Length -gt 5) {
+            $PropertyBag.AddValue("State","OverMiddleThreshold")
+            }
+            else
+            {
+            $PropertyBag.AddValue("State","UnderThreshold")
+            }
+
+            # Send output to SCOM
+            $PropertyBag
+          </ScriptBody>
+          <Arguments>one two three four</Arguments>
+          <TimeoutSeconds>60</TimeoutSeconds>
+          <UnhealthyExpression>
+            <SimpleExpression>
+              <ValueExpression>
+                <XPathQuery>Property[@Name='State']</XPathQuery>
+              </ValueExpression>
+              <Operator>Equal</Operator>
+              <ValueExpression>
+                <Value Type="String">OverUpperThreshold</Value>
+              </ValueExpression>
+            </SimpleExpression>
+          </UnhealthyExpression>
+          <WarningExpression>
+            <SimpleExpression>
+              <ValueExpression>
+                <XPathQuery>Property[@Name='State']</XPathQuery>
+              </ValueExpression>
+              <Operator>Equal</Operator>
+              <ValueExpression>
+                <Value Type="String">OverMiddleThreshold</Value>
+              </ValueExpression>
+            </SimpleExpression>
+          </WarningExpression>
+          <HealthyExpression>
+            <SimpleExpression>
+              <ValueExpression>
+                <XPathQuery>Property[@Name='State']</XPathQuery>
+              </ValueExpression>
+              <Operator>Equal</Operator>
+              <ValueExpression>
+                <Value Type="String">UnderThreshold</Value>
+              </ValueExpression>
+            </SimpleExpression>
+          </HealthyExpression>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+  </Monitoring>
+  <Presentation>
+    <Folders>
+      <Folder ID="Folder_ff25ff0e391847ef8d9ddf45eeceeecb" Accessibility="Public" ParentFolder="SystemCenter!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+    </Folders>
+    <StringResources>
+      <StringResource ID="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b_AlertMessageResourceID" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="DPS.Powershell.Three.State">
+          <Name>DPS Powershell Three State</Name>
+        </DisplayString>
+        <DisplayString ElementID="Folder_ff25ff0e391847ef8d9ddf45eeceeecb">
+          <Name>DPS Powershell Three State</Name>
+        </DisplayString>
+        <DisplayString ElementID="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b">
+          <Name>DPS PoSh 3 state monitor</Name>
+          <Description />
+        </DisplayString>
+        <DisplayString ElementID="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b_AlertMessageResourceID">
+          <Name>DPS PoSh 3 state monitor</Name>
+          <Description>Please see the alert context for details.</Description>
+        </DisplayString>
+        <DisplayString ElementID="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b" SubElementID="UIGeneratedOpStateId050154af4a494e2582566981ba4e8113">
+          <Name>Healthy</Name>
+        </DisplayString>
+        <DisplayString ElementID="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b" SubElementID="UIGeneratedOpStateId07bc17ee3fe1401184d503bad9e06c48">
+          <Name>Unhealthy</Name>
+        </DisplayString>
+        <DisplayString ElementID="UIGeneratedMonitora7fe50e0602f48f6bb68fe12d113301b" SubElementID="UIGeneratedOpStateId7fea2b72f57d417799db21345f5529eb">
+          <Name>Warning</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks> 
+</ManagementPackFragment>

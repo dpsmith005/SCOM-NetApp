@@ -1,0 +1,127 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance3d5876a2e98b4569931758d52012d10f" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Discover.Netapp.Comptuer.Proxy</Id>
+        <DisplayName>Discover Proxy Computer</DisplayName>
+        <Description>Discover Windows proxy computer</Description>
+        <DataSourceId>DS1</DataSourceId>
+        <DataSourceConfig>&lt;ComputerName&gt;$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/ComputerName&gt;&lt;RegistryAttributeDefinitions&gt;&lt;RegistryAttributeDefinition&gt;&lt;AttributeName&gt;KeyExists&lt;/AttributeName&gt;&lt;Path&gt;SOFTWARE\WSH\NetApp&lt;/Path&gt;&lt;PathType&gt;0&lt;/PathType&gt;&lt;AttributeType&gt;0&lt;/AttributeType&gt;&lt;/RegistryAttributeDefinition&gt;&lt;RegistryAttributeDefinition&gt;&lt;AttributeName&gt;Controllers&lt;/AttributeName&gt;&lt;Path&gt;SOFTWARE\WSH\NetApp\Controllers&lt;/Path&gt;&lt;PathType&gt;1&lt;/PathType&gt;&lt;AttributeType&gt;1&lt;/AttributeType&gt;&lt;/RegistryAttributeDefinition&gt;&lt;/RegistryAttributeDefinitions&gt;&lt;Frequency&gt;86400&lt;/Frequency&gt;&lt;ClassId&gt;$MPElement[Name="Windows.Computer.Netapp.Computer"]$&lt;/ClassId&gt;&lt;InstanceSettings&gt;&lt;Settings&gt;&lt;Setting&gt;&lt;Name&gt;$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Setting&gt;&lt;Setting&gt;&lt;Name&gt;$MPElement[Name="System!System.Entity"]/DisplayName$&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Setting&gt;&lt;Setting&gt;&lt;Name&gt;$MPElement[Name="Windows.Computer.Netapp.Computer"]/NodeName$&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Setting&gt;&lt;Setting&gt;&lt;Name&gt;$MPElement[Name="Windows.Computer.Netapp.Computer"]/Controllers$&lt;/Name&gt;&lt;Value&gt;$Data/Values/Controllers$&lt;/Value&gt;&lt;/Setting&gt;&lt;/Settings&gt;&lt;/InstanceSettings&gt;&lt;Expression&gt;&lt;SimpleExpression&gt;&lt;ValueExpression&gt;&lt;XPathQuery&gt;Values/KeyExists&lt;/XPathQuery&gt;&lt;/ValueExpression&gt;&lt;Operator&gt;Equal&lt;/Operator&gt;&lt;ValueExpression&gt;&lt;Value&gt;true&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;/SimpleExpression&gt;&lt;/Expression&gt;</DataSourceConfig>
+        <DataSourceType>Windows!Microsoft.Windows.FilteredRegistryDiscoveryProvider</DataSourceType>
+        <Target>Windows!Microsoft.Windows.Computer</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>Windows.Computer.Netapp.Computer</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships />
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instanced6b6167ba8b64ff3955e8f8a537c2214" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Discover.Netapp.Controllers</Id>
+        <DisplayName>Discover Netapp Controllers</DisplayName>
+        <Description>Discover netapp controllers via a powershell script.</Description>
+        <DataSourceId>DS2</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;86400&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverNetstatWatcherItems.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Service Model/Discoveries/DiscoverNetappControllers.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;controllers&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Computer"]/Controllers$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;nodeName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;240&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
+        <Target>Windows.Computer.Netapp.Computer</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>Windows.Computer.Netapp.Controller</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships />
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instancec71aa3fb66ad4e6ab59572646589e9bf" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Discover.Netapp.Controller.Relationship</Id>
+        <DisplayName>Discover Netapp Controller Relationships</DisplayName>
+        <Description>Discover the controller relationship</Description>
+        <DataSourceId>DS3</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;86400&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverNetAppControllerRelationship.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Service Model/Discoveries/DiscoverNetAppControllerRelationship.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;controllers&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Computer"]/Controllers$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;nodeName&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Computer"]/NodeName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;ComputerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;240&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
+        <Target>Windows.Computer.Netapp.Computer</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses />
+        <DiscoveryRelationships>
+          <DiscoveryRelationshipItem>
+            <TypeId>SC!Microsoft.SystemCenter.HealthServiceShouldManageEntity</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+          <DiscoveryRelationshipItem>
+            <TypeId>Windows.Computer.Netapp.Controllers.Relationship</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+        </DiscoveryRelationships>
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instancef6320246396043ab8825d3de61818d9c" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Discover.Netapp.Volumes</Id>
+        <DisplayName>Discover Netapp Volumes</DisplayName>
+        <Description>Discover netapp volumes via a powershell script.</Description>
+        <DataSourceId>DS4</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;3600&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverNetAppVolumes.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Service Model/Discoveries/DiscoverNetAppVolumes.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;KeyC&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Controller"]/KeyC$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;cluster&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ClusterName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;nodeName&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ComputerName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;240&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
+        <Target>Windows.Computer.Netapp.Controller</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>Windows.Computer.Netapp.Controller</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships />
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instance7d62b4c4db4c4577a557df26131eb614" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Discover.Netapp.Volume.Relationships</Id>
+        <DisplayName>Discover Netapp Volume Relationships</DisplayName>
+        <Description>Discover netapp volume relationships via a powershell script.</Description>
+        <DataSourceId>DS5</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;3600&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverNetAppVolumeRelationships.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Service Model/Discoveries/DiscoverNetAppVolumeRelationships.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;KeyC&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Controller"]/KeyC$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;cluster&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ClusterName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;nodeName&lt;/Name&gt;&lt;Value&gt;$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ComputerName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;240&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
+        <Target>Windows.Computer.Netapp.Controller</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses />
+        <DiscoveryRelationships>
+          <DiscoveryRelationshipItem>
+            <TypeId>SC!Microsoft.SystemCenter.HealthServiceShouldManageEntity</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+          <DiscoveryRelationshipItem>
+            <TypeId>Windows.Computer.NetApp.Volume.Relationship</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+        </DiscoveryRelationships>
+      </DiscoveryConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

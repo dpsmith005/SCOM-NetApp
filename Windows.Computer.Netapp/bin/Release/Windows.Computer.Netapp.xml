@@ -1,0 +1,1839 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ManagementPack SchemaVersion="2.0" ContentReadable="true" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manifest>
+    <Identity>
+      <ID>Windows.Computer.Netapp</ID>
+      <Version>1.0.0.106</Version>
+    </Identity>
+    <Name>Windows.Computer.Netapp</Name>
+    <References>
+      <Reference Alias="SC">
+        <ID>Microsoft.SystemCenter.Library</ID>
+        <Version>7.0.8443.6</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Windows">
+        <ID>Microsoft.Windows.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Health">
+        <ID>System.Health.Library</ID>
+        <Version>7.0.8443.6</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Windows.Computer.Netapp.Computer" Base="Windows!Microsoft.Windows.ComputerRole" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" Extension="false">
+          <Property ID="NodeName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Controllers" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="Windows.Computer.Netapp.Controller" Comment="VSAE David Smith" Accessibility="Public" Abstract="false" Base="System!System.LogicalEntity" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="KeyC" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="ComputerName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Ontapi" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Version" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="ClusterName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="IpAddress" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Comment" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="Windows.Computer.Netapp.Volume" Comment="VSAE David Smith" Accessibility="Public" Abstract="false" Base="System!System.LogicalHardware" Hosted="true" Singleton="false" Extension="false">
+          <Property ID="KeyV" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Aggregate" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Available" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Dedupe" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+          <Property ID="EncryptSpecified" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="FilesTotal" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="FilesUsed" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="IsInfiniteVolume" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="JunctionPath" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="VolumeName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="NcController" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Node" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="VolState" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="TotalSize" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Used" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="40" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Vserver" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Comment" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+      </ClassTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="Windows.Computer.Netapp.Controllers.Relationship" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Computer" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Controller" />
+        </RelationshipType>
+        <RelationshipType ID="Windows.Computer.NetApp.Volume.Relationship" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Controller" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="Windows.Computer.Netapp.Volume" />
+        </RelationshipType>
+      </RelationshipTypes>
+    </EntityTypes>
+    <ModuleTypes>
+      <DataSourceModuleType ID="Netapp.Volume.Monitor3.DS" Accessibility="Internal" Batching="false">
+        <Configuration>
+          <xsd:element minOccurs="1" type="xsd:integer" name="IntervalSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" type="xsd:string" name="SyncTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="KeyV" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="PercentError" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="PercentWarn" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="ComputerName" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:integer" name="TimeoutSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="KeyV" Selector="$Config/KeyV$" ParameterType="string" />
+          <OverrideableParameter ID="PercentError" Selector="$Config/PercentError$" ParameterType="int" />
+          <OverrideableParameter ID="PercentWarn" Selector="$Config/PercentWarn$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                    <SyncTime>$Config/SyncTime$</SyncTime>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="PA" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>NetAppMonitorThreeState.ps1</ScriptName>
+                <ScriptBody><![CDATA[param([string]$KeyV,$PercentError,$PercentWarn,[string]$ComputerName)
+#param($KeyV,$PercentError,$PercentWarn)
+
+# For testing
+# $KeyV = "SCOMTST01.wellspan.org_nafscl502.wellspan.org_svm_pna501_vol_pna527"
+# $PercentError = 97
+# $PercentWarn = 93
+
+$PercentError    = [int]::Parse($PercentError)
+$PercentWarn     = [int]::Parse($PercentWarn)
+
+# Load MOMScript API
+$api           = New-Object -ComObject 'MOM.ScriptAPI'
+
+$Global:Error.Clear()
+$script:ErrorView      = 'NormalView'
+$ErrorActionPreference = 'Continue'
+$StartTime = Get-Date
+$whoami = whoami
+
+$testedAt              = "Tested on: $(Get-Date -Format u) / $(([TimeZoneInfo]::Local).DisplayName)"
+
+$localComputerName     = $env:COMPUTERNAME
+$localComputerDomain   = ([System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()).Name
+$localIPAddresses      = ([System.Net.Dns]::GetHostAddresses($localComputerName)) | Where-Object { $_.AddressFamily -eq 'interNetwork' } | Select-Object -ExpandProperty IPAddressToString	| Select-Object -First 1
+$scriptName = "NetAppMonitorThreeState.ps1"
+$proxyServer = ($KeyV -split ";")[0]
+$cluster =  ($KeyV -split ";")[1]
+$vserver =  ($KeyV -split ";")[2]
+$volName  =  ($KeyV -split ";")[3]
+
+testedAt        = "Tested on: $(Get-Date -Format u) / $(([TimeZoneInfo]::Local).DisplayName)"
+$EventID = 3110
+
+$api.LogScriptEvent($ScriptName,$EventID,4,"Starting script $($scriptName)`nRunning as ($whoami)`nKey $($KeyV)`nPercentError $($PercentError)`nPercentWarn $($PercentWarn)`nProxy Server $($proxyServer)`nCluster $($cluster) `n vServer $($vserver) `n Volume $($volName)")
+
+# Load DataONTAP, get NetApp credentials, Get controller info
+import-module DataONTAP
+$cred =  Import-Clixml E:\scripts\Netapp\netapp.dat
+
+# connect to NetApp server to get controller stats
+$NcControllerInfo = Connect-NcController -Name $cluster -Credential $cred 
+$ControllerName = $NcControllerInfo.Name
+
+# Get volume info from cluster
+$navinfo = get-ncvol -name $volName -vserver $vserver
+
+$KeysAll = @()
+foreach ($item in $navinfo) {
+	$available = $item.available
+	$total = $item.TotalSize
+	$Used = $item.Used
+	$key = $proxyServer +";"+ $item.NcController +";"+ $item.Vserver +";"+ $item.Name
+	$KeysAll += $key
+	$supplement = "Volume: $($key)`t$($KeyV) `n Available: $($available)`t `n Total: $($total)`n PercentUsed: $($Used)"
+
+	if ($key -eq $KeyV) {
+		$FreeGB = [int]($item.available /1GB)
+		if ($Used -lt $PercentWarn) {
+			$state       = 'GoodCondition'
+			$supplement += "`nPercent below warn level $($PercentWarn)"
+		} elseif ($Used -ge $PercentError) {
+			$state       = 'ErrorCondition'
+			$supplement += "`nPercent above error level $($PercentError)"
+		} else {
+			$state       = 'WarnCondition'
+			$supplement += "`nPercent between warn and error level $($PercentWarn) - $($PercentError)"
+		}																						
+
+		#$api.LogScriptEvent($ScriptName,3111,4,"Key matched $key.  State is $state. $testedAt")
+
+		$bag = $api.CreatePropertybag()								
+		$bag.AddValue("Key",$KeyV)		
+		$bag.AddValue("State",$state)				
+		$bag.AddValue("Volume",$volName)
+		$bag.AddValue("FreeSpace",$FreeGB)
+		$bag.AddValue("UsedPct", $Used)
+		$bag.AddValue("Supplement",$supplement)		
+		$bag.AddValue("TestedAt",$testedAt)			
+		$bag					
+	}
+}
+
+$Allkeys = $KeysAll -join "`n"
+$VolumeCounts = $navinfo.count
+$api.LogScriptEvent($ScriptName,3112,4,"`n Controller Name: $ControllerName `n Volume count: $VolumeCounts `n Key: $($KeyV) All Keys: `n $($Allkeys) `n State: $($state) `n Supplement: $($supplement)")]]></ScriptBody>
+                <Parameters>
+                  <Parameter>
+                    <Name>KeyV</Name>
+                    <Value>$Config/KeyV$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>PercentError</Name>
+                    <Value>$Config/PercentError$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>PercentWarn</Name>
+                    <Value>$Config/PercentWarn$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ComputerName</Name>
+                    <Value>$Config/ComputerName$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="Netapp.Volume.Monitor.DS" Accessibility="Internal" Batching="false">
+        <Configuration>
+          <xsd:element minOccurs="1" type="xsd:integer" name="IntervalSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" type="xsd:string" name="SyncTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="KeyV" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="PercentWarn" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="ComputerName" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:integer" name="TimeoutSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="KeyV" Selector="$Config/KeyV$" ParameterType="string" />
+          <OverrideableParameter ID="PercentWarn" Selector="$Config/PercentWarn$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                    <SyncTime>$Config/SyncTime$</SyncTime>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="PA" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>Netapp.Volume.Monitor.Two.State.ps1</ScriptName>
+                <ScriptBody><![CDATA[param([string]$KeyV,$PercentWarn,[string]$ComputerName)
+
+#=================================================================================
+# Assign script name variable for use in event logging.
+$ScriptName = "WSH.Netapp.Volume.Monitor.ps1"
+$EventID = "3109"
+$proxyServer = ($KeyV -split ";")[0]
+$cluster =  ($KeyV -split ";")[1]
+$vserver =  ($KeyV -split ";")[2]
+$volName  =  ($KeyV -split ";")[3]
+#=================================================================================
+
+# Starting Script section - All scripts get this
+#=================================================================================
+# Gather the start time of the script
+$StartTime = Get-Date
+#Set variable to be used in logging events
+$whoami = whoami
+# Load MOMScript API
+$momapi = New-Object -comObject MOM.ScriptAPI
+# Load PropertyBag function
+$bag = $momapi.CreatePropertyBag()
+#Log script event that we are starting task
+$momapi.LogScriptEvent($ScriptName,$EventID,0,"`n Script is starting. `n Running as ($whoami).")
+#=================================================================================
+
+# Begin MAIN script section
+#=================================================================================
+$whoami = whoami
+$testedAt              = "Tested on: $(Get-Date -Format u) / $(([TimeZoneInfo]::Local).DisplayName)"
+$localComputerName     = $env:COMPUTERNAME
+$momapi.LogScriptEvent($ScriptName,$EventID,4,"Starting script $($scriptName)`nRunning as ($whoami)`n localComputer $($localComputerName)`n ComputerName $($ComputerName)`n KeyV $($KeyV)`nPercentWarn $($PercentWarn)`nPercentError $($PercentError)")
+
+# Load DataONTAP, get NetApp credentials, Get controller info
+import-module DataONTAP
+$cred =  Import-Clixml E:\scripts\Netapp\netapp.dat
+
+# connect to NetApp server to get controller stats
+$NcControllerInfo = Connect-NcController -Name $cluster -Credential $cred 
+$ControllerName = $NcControllerInfo.Name
+
+# Get volume info from cluster
+$navinfo = get-ncvol -name $volName -vserver $vserver
+$item = $navinfo[0]
+
+$available = $item.available
+$total = $item.TotalSize
+$Used = $item.Used
+$key = $proxyServer +";"+ $item.NcController +";"+ $item.Vserver +";"+ $item.Name
+$supplement = "Volume: $($key)`t$($KeyV) `n Available: $($available)`t `n Total: $($total)`n PercentUsed: $($Used)"
+$FreeGB = [int]($item.available /1GB)
+
+#Check the value of Used percent
+if ($Used -lt $PercentWarn) {
+	$momapi.LogScriptEvent($ScriptName,$EventID,0,"Good Condition Found")
+	$bag.AddValue('Result','GoodCondition')
+	$state = 'GoodCondition'
+} ELSE {
+	$momapi.LogScriptEvent($ScriptName,$EventID,0,"Bad Condition Found")
+	$bag.AddValue('Result','BadCondition')
+	$state = 'BadCondition'
+}
+
+$count = $navinfo.count
+$supplement = "Keyv: $($keyV) PercentWarn: $($PercentWarn)  PercentError: $($PercentError) count ($count)"
+
+$bag.AddValue("Volume",$volName)		
+$bag.AddValue("State",$state)
+$bag.AddValue("FreeSpace",$FreeGB)
+$bag.AddValue("UsedPct", $Used)
+$bag.AddValue("Supplement",$supplement)		
+$bag.AddValue("TestedAt",$testedAt)	
+
+# Return all bags
+$bag
+#=================================================================================
+# End MAIN script section
+
+
+# End of script section
+#=================================================================================
+#Log an event for script ending and total execution time.
+$EndTime = Get-Date
+$ScriptTime = ($EndTime - $StartTime).TotalSeconds
+#$momapi.LogScriptEvent($ScriptName,$EventID,0,"`n Script Completed. `n Script Runtime: ($ScriptTime) seconds.")
+#=================================================================================
+# End of script
+
+]]></ScriptBody>
+                <Parameters>
+                  <Parameter>
+                    <Name>KeyV</Name>
+                    <Value>$Config/KeyV$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>PercentWarn</Name>
+                    <Value>$Config/PercentWarn$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ComputerName</Name>
+                    <Value>$Config/ComputerName$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+    <MonitorTypes>
+      <UnitMonitorType ID="Netapp.Volume.Monitor.MonitorType3" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="GoodCondition" NoDetection="false" />
+          <MonitorTypeState ID="WarnCondition" NoDetection="false" />
+          <MonitorTypeState ID="ErrorCondition" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" type="xsd:integer" name="IntervalSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" type="xsd:string" name="SyncTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="KeyV" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="PercentError" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="PercentWarn" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="ComputerName" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:integer" name="TimeoutSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="KeyV" Selector="$Config/KeyV$" ParameterType="string" />
+          <OverrideableParameter ID="PercentError" Selector="$Config/PercentError$" ParameterType="int" />
+          <OverrideableParameter ID="PercentWarn" Selector="$Config/PercentWarn$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS" TypeID="Netapp.Volume.Monitor3.DS">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <KeyV>$Config/KeyV$</KeyV>
+              <PercentError>$Config/PercentError$</PercentError>
+              <PercentWarn>$Config/PercentWarn$</PercentWarn>
+              <ComputerName>$Config/ComputerName$</ComputerName>
+              <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+            </DataSource>
+            <ConditionDetection ID="GoodConditionFilter" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='State']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">GoodCondition</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="WarnConditionFilter" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='State']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">WarnCondition</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="ErrorConditionFilter" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='State']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">ErrorCondition</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="GoodCondition">
+              <Node ID="GoodConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="WarnCondition">
+              <Node ID="WarnConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ErrorCondition">
+              <Node ID="ErrorConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="GoodCondition">
+              <Node ID="GoodConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="WarnCondition">
+              <Node ID="WarnConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="ErrorCondition">
+              <Node ID="ErrorConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      <UnitMonitorType ID="Netapp.Volume.Monitor.MonitorType" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="GoodCondition" NoDetection="false" />
+          <MonitorTypeState ID="BadCondition" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" type="xsd:integer" name="IntervalSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" type="xsd:string" name="SyncTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="KeyV" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="PercentWarn" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:string" name="ComputerName" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" type="xsd:integer" name="TimeoutSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="KeyV" Selector="$Config/KeyV$" ParameterType="string" />
+          <OverrideableParameter ID="PercentWarn" Selector="$Config/PercentWarn$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS" TypeID="Netapp.Volume.Monitor.DS">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <KeyV>$Config/KeyV$</KeyV>
+              <PercentWarn>$Config/PercentWarn$</PercentWarn>
+              <ComputerName>$Config/ComputerName$</ComputerName>
+              <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+            </DataSource>
+            <ConditionDetection ID="GoodConditionFilter" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='Result']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">GoodCondition</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="BadConditionFilter" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='Result']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">BadCondition</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="GoodCondition">
+              <Node ID="GoodConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="BadCondition">
+              <Node ID="BadConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="GoodCondition">
+              <Node ID="GoodConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="BadCondition">
+              <Node ID="BadConditionFilter">
+                <Node ID="DS" />
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="Windows.Computer.Netapp.Discover.Netapp.Comptuer.Proxy" Target="Windows!Microsoft.Windows.Computer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Windows.Computer.Netapp.Computer" />
+        </DiscoveryTypes>
+        <DataSource ID="DS1" TypeID="Windows!Microsoft.Windows.FilteredRegistryDiscoveryProvider">
+          <ComputerName>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
+          <RegistryAttributeDefinitions>
+            <RegistryAttributeDefinition>
+              <AttributeName>KeyExists</AttributeName>
+              <Path>SOFTWARE\WSH\NetApp</Path>
+              <PathType>0</PathType>
+              <AttributeType>0</AttributeType>
+            </RegistryAttributeDefinition>
+            <RegistryAttributeDefinition>
+              <AttributeName>Controllers</AttributeName>
+              <Path>SOFTWARE\WSH\NetApp\Controllers</Path>
+              <PathType>1</PathType>
+              <AttributeType>1</AttributeType>
+            </RegistryAttributeDefinition>
+          </RegistryAttributeDefinitions>
+          <Frequency>86400</Frequency>
+          <ClassId>$MPElement[Name="Windows.Computer.Netapp.Computer"]$</ClassId>
+          <InstanceSettings>
+            <Settings>
+              <Setting>
+                <Name>$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
+                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="Windows.Computer.Netapp.Computer"]/NodeName$</Name>
+                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="Windows.Computer.Netapp.Computer"]/Controllers$</Name>
+                <Value>$Data/Values/Controllers$</Value>
+              </Setting>
+            </Settings>
+          </InstanceSettings>
+          <Expression>
+            <SimpleExpression>
+              <ValueExpression>
+                <XPathQuery>Values/KeyExists</XPathQuery>
+              </ValueExpression>
+              <Operator>Equal</Operator>
+              <ValueExpression>
+                <Value>true</Value>
+              </ValueExpression>
+            </SimpleExpression>
+          </Expression>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Windows.Computer.Netapp.Discover.Netapp.Controllers" Target="Windows.Computer.Netapp.Computer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Windows.Computer.Netapp.Controller" />
+        </DiscoveryTypes>
+        <DataSource ID="DS2" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>86400</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverNetstatWatcherItems.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$controllers,$nodeName)
+
+# Manual Testing section - put stuff here for manually testing script - typically parameters:
+#=================================================================================
+# $SourceId = '{00000000-0000-0000-0000-000000000000}'
+# $ManagedEntityId = '{00000000-0000-0000-0000-000000000000}'
+# $controllers = "nafscl1,nafscl502,nafscl901"
+# $nodeName = "scomtst01.wellspan.org"
+#==================================================================================
+
+$api           = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$Global:Error.Clear()
+$script:ErrorView      = 'NormalView'
+$ErrorActionPreference = 'Continue'
+$StartTime = Get-Date
+$whoami = whoami
+
+$localComputerName     = $env:COMPUTERNAME
+$localComputerDomain   = ([System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()).Name
+$localIPAddresses      = ([System.Net.Dns]::GetHostAddresses($localComputerName)) | Where-Object { $_.AddressFamily -eq 'interNetwork' } | Select-Object -ExpandProperty IPAddressToString | Select-Object -First 1
+$scriptName = "DiscoverNetAppController.ps1"
+$eventID = "3100"
+	
+$api.LogScriptEvent($ScriptName,$EventID,4,"Starting script $($scriptName)`nRunning as ($whoami)`nSource $($sourceId)`nManagedEntityId $($managedEntityId)`nControllers $($controllers)`nNodeName $($nodeName)`n")
+
+# Load DataONTAP, get NetApp credentials, Get controller info
+import-module DataONTAP
+$cred =  Import-Clixml E:\scripts\Netapp\netapp.dat
+# Controller registry values
+#$regPath               = 'HKLM:\SOFTWARE\WSH\NetApp'
+#$controllers           = Get-ItemProperty -Path $regPath | Select-Object -ExpandProperty Controllers
+
+$servers = $controllers -split ","
+foreach ($server in $servers) {
+    # connect to NetApp server to get controller stats
+    $NcControllerInfo = Connect-NcController -Name $server -Credential $cred 
+	$ClusterName = (Resolve-DnsName $NcControllerInfo.Name).Name
+	$comment = "Laste Updated " + (Get-Date).ToString()
+	$keyC = $nodeName + "_"+ $ClusterName
+	$displayName = 'NetappProxy:' + $nodeName + "_Cluster:"+ $ClusterName
+	#Controller Values: ComputerName, KeyC, Ontapi, Version, Name, IpAddress, Comment
+	$instance = $discoveryData.CreateClassInstance("$MPElement[Name='Windows.Computer.Netapp.Controller']$")	
+	#$instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$",$nodeName)   # Inherited Key Property
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/KeyC$", $keyC)				  # Key propery
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/ComputerName$", $nodeName)
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/Ontapi$", $NcControllerInfo.Ontapi)
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/Version$", $NcControllerInfo.Version)
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/ClusterName$", $ClusterName)
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/IpAddress$", $NcControllerInfo.Address.IPAddressToString)
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/Comment$", $comment)
+	$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+	$discoveryData.AddInstance($instance)
+
+	$api.LogScriptEvent($ScriptName,$EventID,4,"nodeName: $($nodeName)`nComputerName: $($nodeName)`nKeyC: $($keyC)`nOntapi: $($NcControllerInfo.Ontapi)`nVersion: $($NcControllerInfo.Version)`nClusterName: $($ClusterName)`nIpAddress: $($NcControllerInfo.Address.IPAddressToString)`nComment: $($comment)")
+}
+
+#Log an event for script ending and total execution time.
+$EndTime = Get-Date
+$ScriptTime = ($EndTime - $StartTime).TotalSeconds
+$api.LogScriptEvent($ScriptName,$EventID,0,"`n $($scriptName) Script Completed in ($ScriptTime) seconds.  For key $keyC")
+
+# Return Discovery Items Normally       $api.return($discoveryData)    
+$discoveryData
+]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>controllers</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Computer"]/Controllers$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>nodeName</Name>
+              <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>240</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Windows.Computer.Netapp.Discover.Netapp.Controller.Relationship" Target="Windows.Computer.Netapp.Computer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="SC!Microsoft.SystemCenter.HealthServiceShouldManageEntity" />
+          <DiscoveryRelationship TypeID="Windows.Computer.Netapp.Controllers.Relationship" />
+        </DiscoveryTypes>
+        <DataSource ID="DS3" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>86400</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverNetAppControllerRelationship.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$controllers,$nodeName,$computerName)
+
+# Manual Testing section - put stuff here for manually testing script - typically parameters:
+#=================================================================================
+# $SourceId = '{00000000-0000-0000-0000-000000000000}'
+# $ManagedEntityId = '{00000000-0000-0000-0000-000000000000}'
+# $controllers = "nafscl1,nafscl502,nafscl901"
+# $nodeName = "scomtst01.wellspan.org"
+#==================================================================================
+
+$api           = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$Global:Error.Clear()
+$script:ErrorView      = 'NormalView'
+$ErrorActionPreference = 'Continue'
+$StartTime = Get-Date
+$whoami = whoami
+
+$localComputerName     = $env:COMPUTERNAME
+$localComputerDomain   = ([System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()).Name
+$localIPAddresses      = ([System.Net.Dns]::GetHostAddresses($localComputerName)) | Where-Object { $_.AddressFamily -eq 'interNetwork' } | Select-Object -ExpandProperty IPAddressToString | Select-Object -First 1
+$scriptName = "DiscoverNetAppControllerRelationships.ps1"
+$eventID = "3101"
+
+$api.LogScriptEvent($ScriptName,$EventID,4,"Starting script $($scriptName)`nRunning as ($whoami)`nSource $($sourceId)`nManagedEntityId $($managedEntityId)`nControllers $($controllers)`nFilePath $($filePath)`nodeName $($nodeName)")
+
+# Load DataONTAP, get NetApp credentials, Get controller info
+import-module DataONTAP
+$cred =  Import-Clixml E:\scripts\Netapp\netapp.dat
+# Controller registry values
+#$regPath               = 'HKLM:\SOFTWARE\WSH\NetApp'
+#$controllers           = Get-ItemProperty -Path $regPath | Select-Object -ExpandProperty Controllers
+
+$srcInstance = $discoveryData.CreateClassInstance("$MPElement[Name='Windows.Computer.Netapp.Computer']$")		
+$srcInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $nodeName)	
+#$srcInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Computer']/NodeName$", $nodeName)
+$discoveryData.AddInstance($srcInstance)
+		
+$healthInstance = $discoveryData.CreateClassInstance("$MPElement[Name='SC!Microsoft.SystemCenter.HealthService']$")		
+$healthInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)			
+$discoveryData.AddInstance($healthInstance)
+
+$servers = $controllers -split ","
+foreach ($server in $servers) {
+	# connect to NetApp server to get controller stats
+    $NcControllerInfo = Connect-NcController -Name $server -Credential $cred 
+	$ClusterName = (resolve-dnsname $NcControllerInfo.Name).Name
+	$keyC = $nodeName + "_"+ $ClusterName
+	$displayName = 'NetappProxy:' + $nodeName + "_Cluster:"+ $ClusterName
+	$comment = "Laste Updated " + (Get-Date).ToString()
+
+	#Controller Values: ComputerName, KeyC, Ontapi, Version, Name, IpAddress, Comment
+	$targetInstance = $discoveryData.CreateClassInstance("$MPElement[Name='Windows.Computer.Netapp.Controller']$")
+	#$targetinstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$",$nodeName)   # Inherited Key Property
+	$targetInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/ComputerName$", $nodeName)
+	$targetInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/KeyC$", $keyC)
+	$targetInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/Ontapi$", $NcControllerInfo.Ontapi)
+	$targetInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/Version$", $NcControllerInfo.Version)
+	$targetInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/ClusterName$", $ClusterName)
+	$targetInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/IpAddress$", $NcControllerInfo.Address.IPAddressToString)
+	$targetInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/Comment$", $comment)
+	$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+
+	$discoveryData.AddInstance($targetInstance)
+
+	$relHealthInstance        = $discoveryData.CreateRelationShipInstance("$MPElement[Name='SC!Microsoft.SystemCenter.HealthServiceShouldManageEntity']$")
+	$relHealthInstance.Source = $healthInstance
+	$relHealthInstance.Target = $targetInstance									
+	$discoveryData.AddInstance($relHealthInstance)
+					
+	$relInstance        = $discoveryData.CreateRelationShipInstance("$MPElement[Name='Windows.Computer.Netapp.Controllers.Relationship']$")
+	$relInstance.Source = $srcInstance
+	$relInstance.Target = $targetInstance									
+	$discoveryData.AddInstance($relInstance)
+}
+
+#Log an event for script ending and total execution time.
+$EndTime = Get-Date
+$ScriptTime = ($EndTime - $StartTime).TotalSeconds
+$api.LogScriptEvent($ScriptName,$EventID,0,"`n $($scriptName) Script Completed in ($ScriptTime) seconds.")
+
+# Return Discovery Items Normally            $api.return($discoveryData)
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>controllers</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Computer"]/Controllers$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>nodeName</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Computer"]/NodeName$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>ComputerName</Name>
+              <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>240</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Windows.Computer.Netapp.Discover.Netapp.Volumes" Target="Windows.Computer.Netapp.Controller" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Windows.Computer.Netapp.Controller" />
+        </DiscoveryTypes>
+        <DataSource ID="DS4" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>3600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverNetAppVolumes.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$KeyC,$cluster,$nodeName)
+
+# Manual Testing section - put stuff here for manually testing script - typically parameters:
+#=================================================================================
+# $SourceId = '{00000000-0000-0000-0000-000000000000}'
+# $ManagedEntityId = '{00000000-0000-0000-0000-000000000000}'
+# $cluster = "nafscl502.wellspan.org"    #controllers: nafscl1,nafscl502,nafscl901
+# $nodeName = "scomtst01.wellspan.org"
+#==================================================================================
+
+$api           = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$Global:Error.Clear()
+$script:ErrorView      = 'NormalView'
+$ErrorActionPreference = 'Continue'
+$StartTime = Get-Date
+$whoami = whoami
+
+$localComputerName     = $env:COMPUTERNAME
+$localComputerDomain   = ([System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()).Name
+$localIPAddresses      = ([System.Net.Dns]::GetHostAddresses($localComputerName)) | Where-Object { $_.AddressFamily -eq 'interNetwork' } | Select-Object -ExpandProperty IPAddressToString | Select-Object -First 1
+$scriptName = "DiscoverNetAppVolumes.ps1"
+$eventID = "3102"
+
+$api.LogScriptEvent($ScriptName,$EventID,4,"Starting script $($scriptName)`nRunning as ($whoami)`nSource $($sourceId)`n ManagedEntityId $($managedEntityId)`nController $($cluster)`nNodeName $($nodeName)")
+
+# Load DataONTAP, get NetApp credentials, Get controller info
+import-module DataONTAP
+$cred =  Import-Clixml E:\scripts\Netapp\netapp.dat
+# Controller registry values
+#$regPath               = 'HKLM:\SOFTWARE\WSH\NetApp'
+#$filePath              = Get-ItemProperty -Path $regPath | Select-Object -ExpandProperty FilePath
+#$controllers           = Get-ItemProperty -Path $regPath | Select-Object -ExpandProperty Controllers
+#$servers = $controllers -split ","
+
+# connect to NetApp server to get controller stats
+$NcControllerInfo = Connect-NcController -Name $cluster -Credential $cred 
+
+# Get volume info from cluster
+$navinfo = get-ncvol
+
+$comment = "Laste Updated " + (Get-Date).ToString()
+
+foreach ($item in $navinfo) {
+	$instance = $DiscoveryData.CreateClassInstance("$MPElement[Name='Windows.Computer.Netapp.Volume']$")
+     $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/KeyC$", $keyC)
+    $KeyV = $nodeName + ";" + $cluster + ";" + $item.Vserver + ";" + $item.Name
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/KeyV$", $KeyV) # Volume Key
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Aggregate$", $item.Aggregate)
+    if ([string]::IsNullOrEmpty($item.available)) {
+        [int64]$available = 0
+    } else {
+        [int64]$available = $item.available / 1GB
+    }
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Available$", $available.ToString())
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Dedupe$", $item.Dedupe)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/EncryptSpecified$", $item.EncryptSpecified)
+    if ([string]::IsNullOrEmpty($item.FilesTotal)) {
+        [int64]$filesTotal = 0
+    } else {
+        [int64]$filesTotal = $item.FilesTotal
+    }
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/FilesTotal$", $filesTotal.ToString())
+    if ([string]::IsNullOrEmpty($item.FilesUsed)) {
+        [int64]$filesUsed = 0
+    } else {
+        [int64]$filesUsed = $item.FilesUsed
+    }
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/FilesUsed$", $filesUsed.ToString())
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/IsInfiniteVolume$", $item.IsInfiniteVolume)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/JunctionPath$", $item.JunctionPath)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/VolumeName$", $item.Name)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/NcController$", $item.NcController.Name)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Node$", "Volume_$($item.Vserver):/vol/$($item.Name)")
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/VolState$", $item.State)
+    [int64]$totalSize =  $item.TotalSize / 1GB
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/TotalSize$", $totalSize.ToString())
+    [int64]$used = $totalSize - $available
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Used$", $used.ToString())
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Vserver$",$item.Vserver)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Comment$", $comment)
+    #$displayName = 'NetappVolume:' + $nodeName + "_Cluster:"+ $cluster + "_Vserver:" + $item.Vserver + "_Volume:" + $item.Name
+    $displayName = "Cluster:"+ $cluster + ";Vserver:" + $item.Vserver + ";Volume:" + $item.Name
+    $instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+    $discoveryData.AddInstance($instance)
+}
+
+#Log an event for script ending and total execution time.
+$EndTime = Get-Date
+$ScriptTime = ($EndTime - $StartTime).TotalSeconds
+$api.LogScriptEvent($ScriptName,$EventID,0,"`n $($scriptName) Script Completed in ($ScriptTime) seconds  for $cluster")
+
+# Return Discovery Items Normally       $api.return($discoveryData)    
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>KeyC</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Controller"]/KeyC$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>cluster</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ClusterName$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>nodeName</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ComputerName$</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>240</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Windows.Computer.Netapp.Discover.Netapp.Volume.Relationships" Target="Windows.Computer.Netapp.Controller" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="SC!Microsoft.SystemCenter.HealthServiceShouldManageEntity" />
+          <DiscoveryRelationship TypeID="Windows.Computer.NetApp.Volume.Relationship" />
+        </DiscoveryTypes>
+        <DataSource ID="DS5" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>3600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverNetAppVolumeRelationships.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$KeyC,$cluster,$nodeName)
+
+# Manual Testing section - put stuff here for manually testing script - typically parameters:
+#=================================================================================
+# $SourceId = '{00000000-0000-0000-0000-000000000000}'
+# $ManagedEntityId = '{00000000-0000-0000-0000-000000000000}'
+# $cluster = "nafscl502.wellspan.org"    #controllers: nafscl1,nafscl502,nafscl901
+# $nodeName = "scomtst01.wellspan.org"
+#==================================================================================
+
+$api           = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$Global:Error.Clear()
+$script:ErrorView      = 'NormalView'
+$ErrorActionPreference = 'Continue'
+$StartTime = Get-Date
+$whoami = whoami
+
+$localComputerName     = $env:COMPUTERNAME
+$localComputerDomain   = ([System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()).Name
+$localIPAddresses      = ([System.Net.Dns]::GetHostAddresses($localComputerName)) | Where-Object { $_.AddressFamily -eq 'interNetwork' } | Select-Object -ExpandProperty IPAddressToString | Select-Object -First 1
+$scriptName = "DiscoverNetAppVolumeRelationships.ps1"
+$eventID = "3103"
+
+$api.LogScriptEvent($ScriptName,$EventID,4,"Starting script $($scriptName)`nRunning as ($whoami)`nSource $($sourceId)`nManagedEntityId $($managedEntityId)`nController $($cluster)`nNodeName $($nodeName)`nKeyC $($KeyC)")
+
+# Load DataONTAP, get NetApp credentials, Get controller info
+import-module DataONTAP
+$cred =  Import-Clixml E:\scripts\Netapp\netapp.dat
+# Controller registry values
+#$regPath               = 'HKLM:\SOFTWARE\WSH\NetApp'
+#$filePath              = Get-ItemProperty -Path $regPath | Select-Object -ExpandProperty FilePath
+#$controllers           = Get-ItemProperty -Path $regPath | Select-Object -ExpandProperty Controllers
+#$servers = $controllers -split ","
+
+
+$srcInstance = $discoveryData.CreateClassInstance("$MPElement[Name='Windows.Computer.Netapp.Controller']$")	
+$srcInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/KeyC$", $KeyC)		
+$discoveryData.AddInstance($srcInstance)
+#$srcInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $nodeName)
+#$srcInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/ComputerName$", $nodeName)	
+
+
+$healthInstance = $discoveryData.CreateClassInstance("$MPElement[Name='SC!Microsoft.SystemCenter.HealthService']$")
+$healthInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $nodeName)
+$discoveryData.AddInstance($healthInstance)
+#$healthInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/KeyC$", $keyC)
+#$healthInstance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/ComputerName$", $nodeName)
+
+
+# connect to NetApp server to get controller stats
+$NcControllerInfo = Connect-NcController -Name $cluster -Credential $cred 
+
+# Get volume info from cluster
+$navinfo = get-ncvol
+
+$comment = "Laste Updated " + (Get-Date).ToString()
+
+foreach ($item in $navinfo) {
+	$instance = $DiscoveryData.CreateClassInstance("$MPElement[Name='Windows.Computer.Netapp.Volume']$")
+    #$instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$",$nodeName)   # Inherited Key Property
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Controller']/KeyC$", $keyC)
+    $KeyV = $nodeName + ";" + $cluster + ";" + $item.Vserver + ";" + $item.Name
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/KeyV$", $KeyV) # Volume Key
+	$instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Aggregate$", $item.Aggregate)
+    if ([string]::IsNullOrEmpty($item.available)) {
+        [int64]$available = 0
+    } else {
+        [int64]$available = $item.available / 1GB
+    }
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Available$", $available.ToString())
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Dedupe$", $item.Dedupe)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/EncryptSpecified$", $item.EncryptSpecified)
+    if ([string]::IsNullOrEmpty($item.FilesTotal)) {
+        [int64]$filesTotal = 0
+    } else {
+        [int64]$filesTotal = $item.FilesTotal
+    }
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/FilesTotal$", $filesTotal.ToString())
+    if ([string]::IsNullOrEmpty($item.FilesUsed)) {
+        [int64]$filesUsed = 0
+    } else {
+        [int64]$filesUsed = $item.FilesUsed
+    }
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/FilesUsed$", $filesUsed.ToString())
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/IsInfiniteVolume$", $item.IsInfiniteVolume)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/JunctionPath$", $item.JunctionPath)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/VolumeName$", $item.Name)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/NcController$", $item.NcController.Name)
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Node$", "Volume_$($item.Vserver):/vol/$($item.Name)")
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/VolState$", $item.State)
+    [int64]$totalSize =  $item.TotalSize / 1GB
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/TotalSize$", $totalSize.ToString())
+    [int64]$used = $totalSize - $available
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Used$", $used.ToString() )
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Vserver$",$item.Vserver )
+    $instance.AddProperty("$MPElement[Name='Windows.Computer.Netapp.Volume']/Comment$", $comment)
+    #$displayName = 'NetappVolume:' + $nodeName + "_Cluster:"+ $cluster + "_Vserver:" + $ite.Vserver + "_Volume:" + $item.Name
+    $displayName = "Cluster:"+ $cluster + ";Vserver:" + $item.Vserver + ";Volume:" + $item.Name
+    $instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+    $discoveryData.AddInstance($instance)
+
+    $relHealthInstance        = $discoveryData.CreateRelationShipInstance("$MPElement[Name='SC!Microsoft.SystemCenter.HealthServiceShouldManageEntity']$")
+	$relHealthInstance.Source = $healthInstance
+	$relHealthInstance.Target = $instance									
+	$discoveryData.AddInstance($relHealthInstance)
+					
+	$relInstance        = $discoveryData.CreateRelationShipInstance("$MPElement[Name='Windows.Computer.Netapp.Volume']$")
+	$relInstance.Source = $srcInstance
+	$relInstance.Target = $instance									
+	#$discoveryData.AddInstance($relInstance)
+}
+
+#Log an event for script ending and total execution time.
+$EndTime = Get-Date
+$ScriptTime = ($EndTime - $StartTime).TotalSeconds
+$api.LogScriptEvent($ScriptName,$EventID,0,"`n $($scriptName) Script Completed in ($ScriptTime) seconds for $cluster")
+
+# Return Discovery Items Normally       $api.return($discoveryData)    
+$discoveryData
+]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>KeyC</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Controller"]/KeyC$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>cluster</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ClusterName$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>nodeName</Name>
+              <Value>$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ComputerName$</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>240</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+    <Monitors>
+      <UnitMonitor ID="Windows.Computer.Netapp.Monitor.Netapp.Controller" Accessibility="Internal" Enabled="true" Target="Windows.Computer.Netapp.Controller" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Windows!Microsoft.Windows.WmiBased.Performance.ConsecutiveSamplesThreshold" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="Windows.Computer.Netapp.Monitor.Netapp.Controller.AlertMessage">
+          <AlertOnState>Warning</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="ConditionTrue" MonitorTypeStateID="ConditionTrue" HealthState="Error" />
+          <OperationalState ID="ConditionFalse" MonitorTypeStateID="ConditionFalse" HealthState="Success" />
+        </OperationalStates>
+        <Configuration>
+          <NameSpace>root\cimv2</NameSpace>
+          <Query>SELECT * FROM Win32_PingStatus WHERE Address='$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ComputerName$'</Query>
+          <Frequency>300</Frequency>
+          <ObjectName>tcpPingCheck</ObjectName>
+          <CounterName>PingCheckResponse</CounterName>
+          <InstanceName />
+          <Value>$Data/Property[@Name='StatusCode']$</Value>
+          <Threshold>0</Threshold>
+          <Direction>greater</Direction>
+          <NumSamples>4</NumSamples>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Windows.Computer.Netapp.Monitor.Netapp.Computer" Accessibility="Internal" Enabled="true" Target="Windows.Computer.Netapp.Computer" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Windows!Microsoft.Windows.WmiBased.Performance.ConsecutiveSamplesThreshold" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="Windows.Computer.Netapp.Monitor.Netapp.Computer.AlertMessage">
+          <AlertOnState>Warning</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="ConditionTrue" MonitorTypeStateID="ConditionTrue" HealthState="Error" />
+          <OperationalState ID="ConditionFalse" MonitorTypeStateID="ConditionFalse" HealthState="Success" />
+        </OperationalStates>
+        <Configuration>
+          <NameSpace>root\cimv2</NameSpace>
+          <Query>SELECT * FROM Win32_PingStatus WHERE Address='$Target/Property[Type="Windows.Computer.Netapp.Computer"]/NodeName$'</Query>
+          <Frequency>300</Frequency>
+          <ObjectName>tcpPingCheck</ObjectName>
+          <CounterName>PingCheckResponse</CounterName>
+          <InstanceName />
+          <Value>$Data/Property[@Name='StatusCode']$</Value>
+          <Threshold>0</Threshold>
+          <Direction>greater</Direction>
+          <NumSamples>4</NumSamples>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Netapp.Volume.Monitor" Accessibility="Public" Enabled="true" Target="Windows.Computer.Netapp.Volume" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Netapp.Volume.Monitor.MonitorType3" ConfirmDelivery="true">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="Netapp.Volume.Monitor.AlertMessage">
+          <AlertOnState>Warning</AlertOnState>
+          <!-- Warning or Error should match OperationalStates below  -->
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+          <!-- Common options for AlertSeverity are MatchMonitorHealth, Information, Warning, Error -->
+          <AlertParameters>
+            <AlertParameter1>$Data/Context/Property[@Name='State']$</AlertParameter1>
+            <AlertParameter2>$Data/Context/Property[@Name='Volume']$</AlertParameter2>
+            <AlertParameter3>$Data/Context/Property[@Name='FreeSpace']$</AlertParameter3>
+            <AlertParameter4>$Data/Context/Property[@Name='UsedPct']$</AlertParameter4>
+            <!-- This is an example of passing property output from the script into the alert description -->
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="GoodCondition" MonitorTypeStateID="GoodCondition" HealthState="Success" />
+          <OperationalState ID="WarnCondition" MonitorTypeStateID="WarnCondition" HealthState="Warning" />
+          <OperationalState ID="ErrorCondition" MonitorTypeStateID="ErrorCondition" HealthState="Error" />
+          <!-- HealthState = Warning or Error -->
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>3600</IntervalSeconds>
+          <SyncTime></SyncTime>
+          <KeyV>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/KeyV$</KeyV>
+          <PercentError>90</PercentError>
+          <PercentWarn>85</PercentWarn>
+          <!-- Just an example of some string data to pass into the script -->
+          <!-- <ComputerName>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/NetworkName$</ComputerName> -->
+          <ComputerName>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/VolumeName$</ComputerName>
+          <!-- Might need to change the number of Host entries in this line depending on your target class -->
+          <TimeoutSeconds>120</TimeoutSeconds>
+          <!-- This is the number of consecutive matches that must be met before the monitor will change state.  Also a good example of passing in Integer data. -->
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Netapp.Volume.Monitor.Two.State" Accessibility="Public" Enabled="false" Target="Windows.Computer.Netapp.Volume" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Netapp.Volume.Monitor.MonitorType" ConfirmDelivery="true">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="Netapp.Volume.Monitor.Two.State.AlertMessage">
+          <AlertOnState>Warning</AlertOnState>
+          <!-- Warning or Error should match OperationalStates below  -->
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+          <!-- Common options for AlertSeverity are MatchMonitorHealth, Information, Warning, Error -->
+          <AlertParameters>
+            <AlertParameter1>$Data/Context/Property[@Name='Result']$</AlertParameter1>
+            <AlertParameter2>$Data/Context/Property[@Name='Volume']$</AlertParameter2>
+            <AlertParameter3>$Data/Context/Property[@Name='FreeSpace']$</AlertParameter3>
+            <AlertParameter4>$Data/Context/Property[@Name='UsedPct']$</AlertParameter4>
+            <!-- This is an example of passing property output from the script into the alert description -->
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="GoodCondition" MonitorTypeStateID="GoodCondition" HealthState="Success" />
+          <OperationalState ID="BadCondition" MonitorTypeStateID="BadCondition" HealthState="Warning" />
+          <!-- HealthState = Warning or Error -->
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime></SyncTime>
+          <KeyV>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/KeyV$</KeyV>
+          <PercentWarn>80</PercentWarn>
+          <ComputerName>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/VolumeName$</ComputerName>
+          <TimeoutSeconds>120</TimeoutSeconds>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+  </Monitoring>
+  <Presentation>
+    <Views>
+      <View ID="Windows.Computer.Netapp.View.State.Proxy.Computer" Accessibility="Internal" Target="Windows.Computer.Netapp.Computer" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+      <View ID="Windows.Computer.Netapp.View.State.Netapp.Controller" Accessibility="Internal" Target="Windows.Computer.Netapp.Controller" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Windows.Computer.Netapp.Controller-*-5cd1e7de-b20b-078a-d345-69339b0da18b-*-Health</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>In Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>KeyC</Name>
+            <Id>Windows.Computer.Netapp.Controller/KeyC</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>ComputerName</Name>
+            <Id>Windows.Computer.Netapp.Controller/ComputerName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Ontapi</Name>
+            <Id>Windows.Computer.Netapp.Controller/Ontapi</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Version</Name>
+            <Id>Windows.Computer.Netapp.Controller/Version</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>ClusterName</Name>
+            <Id>Windows.Computer.Netapp.Controller/ClusterName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>IpAddress</Name>
+            <Id>Windows.Computer.Netapp.Controller/IpAddress</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Comment</Name>
+            <Id>Windows.Computer.Netapp.Controller/Comment</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>NetApp Volume Class</Name>
+            <Id>Windows.Computer.Netapp.Volume</Id>
+          </ColumnInfo>
+        </Presentation>
+      </View>
+      <View ID="Windows.Computer.Netapp.View.State.Netapp.Volumes" Accessibility="Internal" Target="Windows.Computer.Netapp.Volume" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Windows.Computer.Netapp.Volume-*-cbf61816-9119-2200-d0ce-a8b028bc1618-*-Health</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>In Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>KeyV</Name>
+            <Id>Windows.Computer.Netapp.Volume/KeyV</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Aggregate</Name>
+            <Id>Windows.Computer.Netapp.Volume/Aggregate</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="18" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Available</Name>
+            <Id>Windows.Computer.Netapp.Volume/Available</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Dedupe</Name>
+            <Id>Windows.Computer.Netapp.Volume/Dedupe</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>EncryptSpecified</Name>
+            <Id>Windows.Computer.Netapp.Volume/EncryptSpecified</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>FilesTotal</Name>
+            <Id>Windows.Computer.Netapp.Volume/FilesTotal</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>FilesUsed</Name>
+            <Id>Windows.Computer.Netapp.Volume/FilesUsed</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>IsInfiniteVolume</Name>
+            <Id>Windows.Computer.Netapp.Volume/IsInfiniteVolume</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>JunctionPath</Name>
+            <Id>Windows.Computer.Netapp.Volume/JunctionPath</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="13" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>VolumeName</Name>
+            <Id>Windows.Computer.Netapp.Volume/VolumeName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="14" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>NcController</Name>
+            <Id>Windows.Computer.Netapp.Volume/NcController</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="16" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Node</Name>
+            <Id>Windows.Computer.Netapp.Volume/Node</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="17" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>VolumeState</Name>
+            <Id>Windows.Computer.Netapp.Volume/VolState</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="19" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>TotalSize</Name>
+            <Id>Windows.Computer.Netapp.Volume/TotalSize</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="20" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Used</Name>
+            <Id>Windows.Computer.Netapp.Volume/Used</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="15" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Vserver</Name>
+            <Id>Windows.Computer.Netapp.Volume/Vserver</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="21" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Comment</Name>
+            <Id>Windows.Computer.Netapp.Volume/Comment</Id>
+          </ColumnInfo>
+        </Presentation>
+      </View>
+      <View ID="Windows.Computer.Netapp.View.Alert.Netapp.Volume" Accessibility="Internal" Target="Windows.Computer.Netapp.Volume" TypeID="SC!Microsoft.SystemCenter.AlertViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <ResolutionState>
+            <StateRange Operator="NotEquals">255</StateRange>
+          </ResolutionState>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="-1" Width="22" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Severity</Name>
+            <Id>Severity</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="54" Grouped="false" Sorted="false" IsSortable="false" Visible="true" SortOrder="Ascending">
+            <Name>Icon</Name>
+            <Id>Icon</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>MonitoringObjectPath</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Source</Name>
+            <Id>MonitoringObjectDisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="22" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>MonitoringObjectInMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="250" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Resolution State</Name>
+            <Id>ResolutionState</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="150" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Created</Name>
+            <Id>TimeRaised</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Age</Name>
+            <Id>Age</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Type</Name>
+            <Id>Category</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Owner</Name>
+            <Id>Owner</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Priority</Name>
+            <Id>Priority</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Latency</Name>
+            <Id>Latency</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="13" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Description</Name>
+            <Id>Description</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="14" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Connector</Name>
+            <Id>ConnectorId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="15" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Forwarding Status</Name>
+            <Id>ConnectorStatus</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="16" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Class</Name>
+            <Id>Class</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="17" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Time in State</Name>
+            <Id>TimeInState</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="18" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 1</Name>
+            <Id>CustomField1</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="19" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 2</Name>
+            <Id>CustomField2</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="20" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 3</Name>
+            <Id>CustomField3</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="21" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 4</Name>
+            <Id>CustomField4</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="22" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 5</Name>
+            <Id>CustomField5</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="23" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 6</Name>
+            <Id>CustomField6</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="24" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 7</Name>
+            <Id>CustomField7</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="25" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 8</Name>
+            <Id>CustomField8</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="26" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 9</Name>
+            <Id>CustomField9</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="27" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 10</Name>
+            <Id>CustomField10</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="28" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Resolved By</Name>
+            <Id>ResolvedBy</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="29" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Time Resolved</Name>
+            <Id>TimeResolved</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="30" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Last State Change</Name>
+            <Id>TimeResolutionStateLastModified</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="31" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Last Modified</Name>
+            <Id>LastModified</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="32" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Last Modified By</Name>
+            <Id>LastModifiedBy</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="33" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Management Group</Name>
+            <Id>ManagementGroup</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="34" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Site</Name>
+            <Id>SiteName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="35" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Repeat Count</Name>
+            <Id>RepeatCount</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="36" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Ticket ID</Name>
+            <Id>TicketId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="37" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>TFS Work Item ID</Name>
+            <Id>TfsWorkItemId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="38" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>TFS Work Item Owner</Name>
+            <Id>TfsWorkItemOwner</Id>
+          </ColumnInfo>
+        </Presentation>
+      </View>
+    </Views>
+    <Folders>
+      <Folder ID="Windows.Computer.Netapp.Folders" Accessibility="Internal" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+    </Folders>
+    <FolderItems>
+      <FolderItem ElementID="Windows.Computer.Netapp.View.State.Proxy.Computer" Folder="Windows.Computer.Netapp.Folders" ID="Windows.Computer.Netapp.View.State.Proxy.Computer.FolderItem" />
+      <FolderItem ElementID="Windows.Computer.Netapp.View.State.Netapp.Controller" Folder="Windows.Computer.Netapp.Folders" ID="Windows.Computer.Netapp.View.State.Netapp.Controller.FolderItem" />
+      <FolderItem ElementID="Windows.Computer.Netapp.View.State.Netapp.Volumes" Folder="Windows.Computer.Netapp.Folders" ID="Windows.Computer.Netapp.View.State.Netapp.Volumes.FolderItem" />
+      <FolderItem ElementID="Windows.Computer.Netapp.View.Alert.Netapp.Volume" Folder="Windows.Computer.Netapp.Folders" ID="Windows.Computer.Netapp.View.Alert.Netapp.Volume.FolderItem" />
+    </FolderItems>
+    <StringResources>
+      <StringResource ID="Windows.Computer.Netapp.Monitor.Netapp.Controller.AlertMessage" />
+      <StringResource ID="Windows.Computer.Netapp.Monitor.Netapp.Computer.AlertMessage" />
+      <StringResource ID="Netapp.Volume.Monitor.AlertMessage" />
+      <StringResource ID="Netapp.Volume.Monitor.Two.State.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Controller">
+          <Name>Monitor Netapp Computer Proxy</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Controller.AlertMessage">
+          <Name>Netapp Controller Not Reachable</Name>
+          <Description>Netapp Controller not reachable monitor</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Controller" SubElementID="ConditionTrue">
+          <Name>ConditionTrue</Name>
+          <Description>ConditionTrue</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Controller" SubElementID="ConditionFalse">
+          <Name>ConditionFalse</Name>
+          <Description>ConditionFalse</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Computer">
+          <Name>Monitor Netapp Computer Proxy</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Computer.AlertMessage">
+          <Name>Netapp Computer proxy Not Reachable</Name>
+          <Description>Netapp Computer Proxy not reachable monitor</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Computer" SubElementID="ConditionTrue">
+          <Name>ConditionTrue</Name>
+          <Description>ConditionTrue</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Monitor.Netapp.Computer" SubElementID="ConditionFalse">
+          <Name>ConditionFalse</Name>
+          <Description>ConditionFalse</Description>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor">
+          <Name>Netapp Volume Monitor</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor" SubElementID="GoodCondition">
+          <Name>Good Condition</Name>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor" SubElementID="WarnCondition">
+          <Name>Warn Condition</Name>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor" SubElementID="ErrorCondition">
+          <Name>Error Condition</Name>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor.AlertMessage">
+          <Name>Netapp Volume Monitor: Failure</Name>
+          <Description>
+              Netapp Volume Monitor: detected a bad condition
+              State: {0}
+              Volume: {1}
+              Free Space: {2}
+              Used Percent: {3}
+            </Description>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State">
+          <Name>Netapp Volume Monitor</Name>
+          <Description>Powershell 2 state monitor</Description>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State" SubElementID="GoodCondition">
+          <Name>Good Condition</Name>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State" SubElementID="BadCondition">
+          <Name>Bad Condition</Name>
+        </DisplayString>
+        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State.AlertMessage">
+          <Name>Netapp Volume Monitor: Failure</Name>
+          <Description>
+              Netapp Volume Monitor: detected a bad condition
+              Result: {0}
+              Volume: {1}
+              Free Space: {2}
+              Used Percent: {3}
+            </Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp">
+          <Name>Windows.Computer.Netapp</Name>
+          <Description>NetApp Discovery Monitoring</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Folders">
+          <Name>Netapp Discovery Monitor</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.View.State.Proxy.Computer">
+          <Name>View Netapp Computer Proxy</Name>
+          <Description>View the proxy server</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.View.State.Netapp.Controller">
+          <Name>View Netapp Controller</Name>
+          <Description>View netapp controllers</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.View.State.Netapp.Volumes">
+          <Name>View Netapp Volumes</Name>
+          <Description>View netapp volumes</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.View.Alert.Netapp.Volume">
+          <Name>Netapp Alerts</Name>
+          <Description>Display the NetApp Volume Class Alerts</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Computer">
+          <Name>NetApp Computer Class</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Computer" SubElementID="NodeName">
+          <Name>NodeName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Computer" SubElementID="Controllers">
+          <Name>Controllers</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller">
+          <Name>NetApp Controller Class</Name>
+          <Description>Discovery the Netapp Controllers via Registery</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="ComputerName">
+          <Name>ComputerName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="KeyC">
+          <Name>KeyC</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="Ontapi">
+          <Name>Ontapi</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="Version">
+          <Name>Version</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="ClusterName">
+          <Name>ClusterName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="IpAddress">
+          <Name>IpAddress</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controller" SubElementID="Comment">
+          <Name>Comment</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume">
+          <Name>NetApp Volume Class</Name>
+          <Description>Discover the volumes for the controllers</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Aggregate">
+          <Name>Aggregate</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Available">
+          <Name>Available</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Dedupe">
+          <Name>Dedupe</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="EncryptSpecified">
+          <Name>EncryptSpecified</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="FilesTotal">
+          <Name>FilesTotal</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="FilesUsed">
+          <Name>FilesUsed</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="IsInfiniteVolume">
+          <Name>IsInfiniteVolume</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="JunctionPath">
+          <Name>JunctionPath</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="KeyV">
+          <Name>KeyV</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="VolumeName">
+          <Name>VolumeName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="NcController">
+          <Name>NcController</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Node">
+          <Name>Node</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="VolState">
+          <Name>VolumeState</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="TotalSize">
+          <Name>TotalSize</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Used">
+          <Name>Used</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Vserver">
+          <Name>Vserver</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Volume" SubElementID="Comment">
+          <Name>Comment</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Controllers.Relationship">
+          <Name>Netapp Computer Controller Relationship</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.NetApp.Volume.Relationship">
+          <Name>NetApp Controller Volume Relationship</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Discover.Netapp.Comptuer.Proxy">
+          <Name>Discover Proxy Computer</Name>
+          <Description>Discover Windows proxy computer</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Discover.Netapp.Controllers">
+          <Name>Discover Netapp Controllers</Name>
+          <Description>Discover netapp controllers via a powershell script.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Discover.Netapp.Controller.Relationship">
+          <Name>Discover Netapp Controller Relationships</Name>
+          <Description>Discover the controller relationship</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Discover.Netapp.Volumes">
+          <Name>Discover Netapp Volumes</Name>
+          <Description>Discover netapp volumes via a powershell script.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Windows.Computer.Netapp.Discover.Netapp.Volume.Relationships">
+          <Name>Discover Netapp Volume Relationships</Name>
+          <Description>Discover netapp volume relationships via a powershell script.</Description>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>

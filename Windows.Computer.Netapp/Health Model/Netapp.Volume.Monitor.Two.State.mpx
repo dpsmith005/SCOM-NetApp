@@ -1,0 +1,255 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--
+%%
+Description:
+  A MONITOR which runs a timed PowerShell script as the DataSource and outputs a propertybag as GOOD or BAD to drive Monitor state and ALERT
+  This Monitor example has parameters which can be passed to the script
+  CompanyID - is a short abbreviation for your company with NO SPACES OR SPECIAL CHARACTERS ALLOWED
+  AppName - is a short name for your app with NO SPACES OR SPECIAL CHARACTERS ALLOWED  
+  ClassID - is the targeted class such as your custom class or Windows!Microsoft.Windows.Server.OperatingSystem
+  UniqueID - Is a unique short description of the monitor purpose (NO SPACES OR SPECIAL CHARACTERS ALLOWED) such as "MonitorFilesInFolder"  
+  
+Version: 1.0
+LastModified: 25-May-2019
+%%
+
+In this fragment you need to replace:
+  ##CompanyID## - 
+  ##AppName## - Netapp
+  ##ClassID## - Windows.Computer.Netapp.Volume
+  ##UniqueID## - Volume 
+
+This fragment depends on references:
+  RequiredReference: Alias="System", ID="System.Library"
+  RequiredReference: Alias="Windows", ID="Microsoft.Windows.Library"
+  RequiredReference: Alias="Health", ID="System.Health.Library"	
+  
+@@Author=Kevin Holman@@  
+-->
+    <TypeDefinitions>
+      <ModuleTypes>
+        <DataSourceModuleType ID="Netapp.Volume.Monitor.DS" Accessibility="Internal" Batching="false">
+          <Configuration>
+            <xsd:element minOccurs="1" type="xsd:integer" name="IntervalSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            <xsd:element minOccurs="0" type="xsd:string" name="SyncTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            <xsd:element minOccurs="1" type="xsd:string" name="KeyV" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            <xsd:element name="PercentWarn" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            
+            <xsd:element minOccurs="1" type="xsd:string" name="ComputerName" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            <xsd:element minOccurs="1" type="xsd:integer" name="TimeoutSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          </Configuration>
+          <OverrideableParameters>
+            <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+            <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+            <OverrideableParameter ID="KeyV" Selector="$Config/KeyV$" ParameterType="string" />
+            <OverrideableParameter ID="PercentWarn" Selector="$Config/PercentWarn$" ParameterType="int" />
+            
+            <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+          </OverrideableParameters>
+          <ModuleImplementation Isolation="Any">
+            <Composite>
+              <MemberModules>
+                <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                  <Scheduler>
+                    <SimpleReccuringSchedule>
+                      <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                      <SyncTime>$Config/SyncTime$</SyncTime>
+                    </SimpleReccuringSchedule>
+                    <ExcludeDates />
+                  </Scheduler>
+                </DataSource>
+                <ProbeAction ID="PA" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                  <ScriptName>Netapp.Volume.Monitor.Two.State.ps1</ScriptName>
+                  <ScriptBody>$IncludeFileContent/Health Model/Netapp.Volume.Monitor.Two.State.ps1$</ScriptBody>
+                   <Parameters>
+                    <Parameter>
+                      <Name>KeyV</Name>
+                      <Value>$Config/KeyV$</Value>
+                    </Parameter>
+                    <Parameter>
+                      <Name>PercentWarn</Name>
+                      <Value>$Config/PercentWarn$</Value>
+                    </Parameter>
+
+                     <Parameter>
+                      <Name>ComputerName</Name>
+                      <Value>$Config/ComputerName$</Value>
+                    </Parameter>
+                  </Parameters>
+                  <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+                </ProbeAction>
+              </MemberModules>
+              <Composition>
+                <Node ID="PA">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Composition>
+            </Composite>
+          </ModuleImplementation>
+          <OutputType>System!System.PropertyBagData</OutputType>
+        </DataSourceModuleType>
+      </ModuleTypes>
+      <MonitorTypes>
+        <UnitMonitorType ID="Netapp.Volume.Monitor.MonitorType" Accessibility="Internal">
+          <MonitorTypeStates>
+            <MonitorTypeState ID="GoodCondition" NoDetection="false" />
+            <MonitorTypeState ID="BadCondition" NoDetection="false" />
+          </MonitorTypeStates>
+          <Configuration>
+            <xsd:element minOccurs="1" type="xsd:integer" name="IntervalSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            <xsd:element minOccurs="0" type="xsd:string" name="SyncTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            <xsd:element minOccurs="1" type="xsd:string" name="KeyV" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+
+            <xsd:element name="PercentWarn" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            
+            <xsd:element minOccurs="1" type="xsd:string" name="ComputerName" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            <xsd:element minOccurs="1" type="xsd:integer" name="TimeoutSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+            
+          </Configuration>
+          <OverrideableParameters>
+            <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+            <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+            <OverrideableParameter ID="KeyV" Selector="$Config/KeyV$" ParameterType="string" />
+
+            <OverrideableParameter ID="PercentWarn" Selector="$Config/PercentWarn$" ParameterType="int" />
+            
+            <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+            
+          </OverrideableParameters>
+          <MonitorImplementation>
+            <MemberModules>
+              <DataSource ID="DS" TypeID="Netapp.Volume.Monitor.DS">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+                <KeyV>$Config/KeyV$</KeyV>
+
+                <PercentWarn>$Config/PercentWarn$</PercentWarn>
+                
+                <ComputerName>$Config/ComputerName$</ComputerName>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+              </DataSource>
+              <ConditionDetection ID="GoodConditionFilter" TypeID="System!System.ExpressionFilter">
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="String">Property[@Name='Result']</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="String">GoodCondition</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+              </ConditionDetection>
+              <ConditionDetection ID="BadConditionFilter" TypeID="System!System.ExpressionFilter">
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="String">Property[@Name='Result']</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="String">BadCondition</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+
+              </ConditionDetection>
+              
+            </MemberModules>
+            <RegularDetections>
+              <RegularDetection MonitorTypeStateID="GoodCondition">
+                <Node ID="GoodConditionFilter">
+                  <Node ID="DS" />
+                </Node>
+              </RegularDetection>
+              <RegularDetection MonitorTypeStateID="BadCondition">
+                <Node ID="BadConditionFilter">
+                  <Node ID="DS" />
+                </Node>
+              </RegularDetection>
+            </RegularDetections>
+            <OnDemandDetections>
+              <OnDemandDetection MonitorTypeStateID="GoodCondition">
+                <Node ID="GoodConditionFilter">
+                  <Node ID="DS" />
+                </Node>
+              </OnDemandDetection>
+              <OnDemandDetection MonitorTypeStateID="BadCondition">
+                <Node ID="BadConditionFilter">
+                  <Node ID="DS" />
+                </Node>
+              </OnDemandDetection>
+            </OnDemandDetections>
+          </MonitorImplementation>
+        </UnitMonitorType>
+      </MonitorTypes>
+    </TypeDefinitions>
+    <Monitoring>
+      <Monitors>
+        <UnitMonitor ID="Netapp.Volume.Monitor.Two.State" Accessibility="Public" Enabled="false" Target="Windows.Computer.Netapp.Volume" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Netapp.Volume.Monitor.MonitorType" ConfirmDelivery="true">
+          <Category>AvailabilityHealth</Category>
+          <AlertSettings AlertMessage="Netapp.Volume.Monitor.Two.State.AlertMessage">
+            <AlertOnState>Warning</AlertOnState>
+            <!-- Warning or Error should match OperationalStates below  -->
+            <AutoResolve>true</AutoResolve>
+            <AlertPriority>Normal</AlertPriority>
+            <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+            <!-- Common options for AlertSeverity are MatchMonitorHealth, Information, Warning, Error -->
+            <AlertParameters>
+              <AlertParameter1>$Data/Context/Property[@Name='Result']$</AlertParameter1>
+              <AlertParameter2>$Data/Context/Property[@Name='Volume']$</AlertParameter2>
+              <AlertParameter3>$Data/Context/Property[@Name='FreeSpace']$</AlertParameter3>
+              <AlertParameter4>$Data/Context/Property[@Name='UsedPct']$</AlertParameter4>
+              <!-- This is an example of passing property output from the script into the alert description -->
+            </AlertParameters>
+          </AlertSettings>
+          <OperationalStates>
+            <OperationalState ID="GoodCondition" MonitorTypeStateID="GoodCondition" HealthState="Success" />
+            <OperationalState ID="BadCondition" MonitorTypeStateID="BadCondition" HealthState="Warning" />
+            <!-- HealthState = Warning or Error -->
+          </OperationalStates>
+          <Configuration>
+            <IntervalSeconds>600</IntervalSeconds>
+            <SyncTime></SyncTime>
+            <KeyV>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/KeyV$</KeyV>
+            <PercentWarn>80</PercentWarn>
+            <ComputerName>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/VolumeName$</ComputerName>
+            <TimeoutSeconds>120</TimeoutSeconds>
+          </Configuration>
+        </UnitMonitor>
+      </Monitors>
+    </Monitoring>
+    <Presentation>
+      <StringResources>
+        <StringResource ID="Netapp.Volume.Monitor.Two.State.AlertMessage" />
+      </StringResources>
+    </Presentation>
+    <LanguagePacks>
+      <LanguagePack ID="ENU" IsDefault="true">
+        <DisplayStrings>
+          <DisplayString ElementID="Netapp.Volume.Monitor.Two.State">
+            <Name>Netapp Volume Monitor</Name>
+            <Description>Powershell 2 state monitor</Description>
+          </DisplayString>
+          <DisplayString ElementID="Netapp.Volume.Monitor.Two.State" SubElementID="GoodCondition">
+            <Name>Good Condition</Name>
+          </DisplayString>
+          <DisplayString ElementID="Netapp.Volume.Monitor.Two.State" SubElementID="BadCondition">
+            <Name>Bad Condition</Name>
+          </DisplayString>
+          <DisplayString ElementID="Netapp.Volume.Monitor.Two.State.AlertMessage">
+            <Name>Netapp Volume Monitor: Failure</Name>
+            <Description>
+              Netapp Volume Monitor: detected a bad condition
+              Result: {0}
+              Volume: {1}
+              Free Space: {2}
+              Used Percent: {3}
+            </Description>
+          </DisplayString>
+        </DisplayStrings>
+      </LanguagePack>
+    </LanguagePacks>
+
+</ManagementPackFragment>

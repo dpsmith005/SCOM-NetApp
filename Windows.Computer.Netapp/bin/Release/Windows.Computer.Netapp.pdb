@@ -1,0 +1,90 @@
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Computer*6*12*ClassType
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*11*12*ClassType
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*21*12*ClassType
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controllers.Relationship*45*10*RelationshipType
+Service Model\Classes\Class1.mpx*Windows.Computer.NetApp.Volume.Relationship*50*10*RelationshipType
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor3.DS*31*10*DataSourceModuleType
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.DS*31*10*DataSourceModuleType
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor.MonitorType3*99*10*UnitMonitorType
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.MonitorType*93*10*UnitMonitorType
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Comptuer.Proxy*6*8*Discovery
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Controllers*62*8*Discovery
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Controller.Relationship*93*8*Discovery
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Volumes*129*8*Discovery
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Volume.Relationships*164*8*Discovery
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Controller*6*8*UnitMonitor
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Computer*31*8*UnitMonitor
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor*220*10*UnitMonitor
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.Two.State*190*10*UnitMonitor
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Proxy.Computer*6*8*View
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Netapp.Controller*9*8*View
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Netapp.Volumes*66*8*View
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.Alert.Netapp.Volume*159*8*View
+Presentation\Folders.mpx*Windows.Computer.Netapp.Folders*4*8*Folder
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Proxy.Computer.FolderItem*327*8*FolderItem
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Netapp.Controller.FolderItem*328*8*FolderItem
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Netapp.Volumes.FolderItem*329*8*FolderItem
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.Alert.Netapp.Volume.FolderItem*330*8*FolderItem
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Controller.AlertMessage*60*8*StringResource
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Computer.AlertMessage*61*8*StringResource
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor.AlertMessage*262*10*StringResource
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.Two.State.AlertMessage*225*10*StringResource
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Controller*67*10*DisplayString
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Controller.AlertMessage*71*10*DisplayString
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Controller*75*10*DisplayString*SubElementID*ConditionTrue
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Controller*79*10*DisplayString*SubElementID*ConditionFalse
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Computer*83*10*DisplayString
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Computer.AlertMessage*87*10*DisplayString
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Computer*91*10*DisplayString*SubElementID*ConditionTrue
+Health Model\Monitors.mptg.mpx*Windows.Computer.Netapp.Monitor.Netapp.Computer*95*10*DisplayString*SubElementID*ConditionFalse
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor*268*12*DisplayString
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor*272*12*DisplayString*SubElementID*GoodCondition
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor*275*12*DisplayString*SubElementID*WarnCondition
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor*278*12*DisplayString*SubElementID*ErrorCondition
+Health Model\MonitorThreeStateModule.mpx*Netapp.Volume.Monitor.AlertMessage*281*12*DisplayString
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.Two.State*231*12*DisplayString
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.Two.State*235*12*DisplayString*SubElementID*GoodCondition
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.Two.State*238*12*DisplayString*SubElementID*BadCondition
+Health Model\Netapp.Volume.Monitor.Two.State.mpx*Netapp.Volume.Monitor.Two.State.AlertMessage*241*12*DisplayString
+ManagementPack.mpx*Windows.Computer.Netapp*5*10*DisplayString
+Presentation\Folders.mpx*Windows.Computer.Netapp.Folders*12*10*DisplayString
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Proxy.Computer*336*10*DisplayString
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Netapp.Controller*340*10*DisplayString
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.State.Netapp.Volumes*344*10*DisplayString
+Presentation\Views.mptg.mpx*Windows.Computer.Netapp.View.Alert.Netapp.Volume*348*10*DisplayString
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Computer*61*10*DisplayString
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Computer*66*10*DisplayString*SubElementID*NodeName
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Computer*70*10*DisplayString*SubElementID*Controllers
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*75*10*DisplayString
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*79*10*DisplayString*SubElementID*ComputerName
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*83*10*DisplayString*SubElementID*KeyC
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*87*10*DisplayString*SubElementID*Ontapi
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*91*10*DisplayString*SubElementID*Version
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*95*10*DisplayString*SubElementID*ClusterName
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*99*10*DisplayString*SubElementID*IpAddress
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controller*103*10*DisplayString*SubElementID*Comment
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*108*10*DisplayString
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*112*10*DisplayString*SubElementID*Aggregate
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*116*10*DisplayString*SubElementID*Available
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*120*10*DisplayString*SubElementID*Dedupe
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*124*10*DisplayString*SubElementID*EncryptSpecified
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*128*10*DisplayString*SubElementID*FilesTotal
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*132*10*DisplayString*SubElementID*FilesUsed
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*136*10*DisplayString*SubElementID*IsInfiniteVolume
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*140*10*DisplayString*SubElementID*JunctionPath
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*144*10*DisplayString*SubElementID*KeyV
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*148*10*DisplayString*SubElementID*VolumeName
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*152*10*DisplayString*SubElementID*NcController
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*156*10*DisplayString*SubElementID*Node
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*160*10*DisplayString*SubElementID*VolState
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*164*10*DisplayString*SubElementID*TotalSize
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*168*10*DisplayString*SubElementID*Used
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*172*10*DisplayString*SubElementID*Vserver
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Volume*176*10*DisplayString*SubElementID*Comment
+Service Model\Classes\Class1.mpx*Windows.Computer.Netapp.Controllers.Relationship*181*10*DisplayString
+Service Model\Classes\Class1.mpx*Windows.Computer.NetApp.Volume.Relationship*185*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Comptuer.Proxy*205*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Controllers*209*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Controller.Relationship*213*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Volumes*217*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*Windows.Computer.Netapp.Discover.Netapp.Volume.Relationships*221*10*DisplayString
