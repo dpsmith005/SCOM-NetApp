@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>Windows.Computer.Netapp</ID>
-      <Version>1.0.0.106</Version>
+      <Version>1.0.0.110</Version>
     </Identity>
     <Name>Windows.Computer.Netapp</Name>
     <References>
@@ -108,7 +108,7 @@
                 </Scheduler>
               </DataSource>
               <ProbeAction ID="PA" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
-                <ScriptName>NetAppMonitorThreeState.ps1</ScriptName>
+                <ScriptName>NetAppVolumeMonitorThreeState.ps1</ScriptName>
                 <ScriptBody><![CDATA[param([string]$KeyV,$PercentError,$PercentWarn,[string]$ComputerName)
 #param($KeyV,$PercentError,$PercentWarn)
 
@@ -225,7 +225,7 @@ $api.LogScriptEvent($ScriptName,3112,4,"`n Controller Name: $ControllerName `n V
         </ModuleImplementation>
         <OutputType>System!System.PropertyBagData</OutputType>
       </DataSourceModuleType>
-      <DataSourceModuleType ID="Netapp.Volume.Monitor.DS" Accessibility="Internal" Batching="false">
+      <DataSourceModuleType ID="Netapp.Volume.FilesUsed.Monitor.DS" Accessibility="Internal" Batching="false">
         <Configuration>
           <xsd:element minOccurs="1" type="xsd:integer" name="IntervalSeconds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="0" type="xsd:string" name="SyncTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
@@ -254,13 +254,13 @@ $api.LogScriptEvent($ScriptName,3112,4,"`n Controller Name: $ControllerName `n V
                 </Scheduler>
               </DataSource>
               <ProbeAction ID="PA" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
-                <ScriptName>Netapp.Volume.Monitor.Two.State.ps1</ScriptName>
+                <ScriptName>Netapp.Volume.FilesUsed.Monitor.Two.State.ps1</ScriptName>
                 <ScriptBody><![CDATA[param([string]$KeyV,$PercentWarn,[string]$ComputerName)
 
 #=================================================================================
 # Assign script name variable for use in event logging.
-$ScriptName = "WSH.Netapp.Volume.Monitor.ps1"
-$EventID = "3109"
+$ScriptName = "Netapp.Volume.FilesUsed.Monitor.ps1"
+$EventID = "3111"
 $proxyServer = ($KeyV -split ";")[0]
 $cluster =  ($KeyV -split ";")[1]
 $vserver =  ($KeyV -split ";")[2]
@@ -300,15 +300,15 @@ $ControllerName = $NcControllerInfo.Name
 $navinfo = get-ncvol -name $volName -vserver $vserver
 $item = $navinfo[0]
 
-$available = $item.available
-$total = $item.TotalSize
-$Used = $item.Used
+$filesTotal = $item.FilesTotal
+$filesUsed = $item.FilesUsed
+$filesUsedPercent = ($filesUsed / $filesTotal ) * 100
 $key = $proxyServer +";"+ $item.NcController +";"+ $item.Vserver +";"+ $item.Name
-$supplement = "Volume: $($key)`t$($KeyV) `n Available: $($available)`t `n Total: $($total)`n PercentUsed: $($Used)"
-$FreeGB = [int]($item.available /1GB)
+$supplement = "Volume: $($key)`t$($KeyV) `n Total Files: $($filesTotal)`t `n Used Files: $($filesUsed)`n Percent Used: $($filesUsedPercent)"
+
 
 #Check the value of Used percent
-if ($Used -lt $PercentWarn) {
+if ($filesUsedPercent -lt $PercentWarn) {
 	$momapi.LogScriptEvent($ScriptName,$EventID,0,"Good Condition Found")
 	$bag.AddValue('Result','GoodCondition')
 	$state = 'GoodCondition'
@@ -323,8 +323,9 @@ $supplement = "Keyv: $($keyV) PercentWarn: $($PercentWarn)  PercentError: $($Per
 
 $bag.AddValue("Volume",$volName)		
 $bag.AddValue("State",$state)
-$bag.AddValue("FreeSpace",$FreeGB)
-$bag.AddValue("UsedPct", $Used)
+$bag.AddValue("FilesTotal",$filesTotal)
+$bag.AddValue("FilesUsed", $filesUsed)
+$bag.AddValue("FilesUsedPercent",$filesUsedPercent)
 $bag.AddValue("Supplement",$supplement)		
 $bag.AddValue("TestedAt",$testedAt)	
 
@@ -482,7 +483,7 @@ $ScriptTime = ($EndTime - $StartTime).TotalSeconds
           </OnDemandDetections>
         </MonitorImplementation>
       </UnitMonitorType>
-      <UnitMonitorType ID="Netapp.Volume.Monitor.MonitorType" Accessibility="Internal">
+      <UnitMonitorType ID="Netapp.Volume.FilesUsed.Monitor.MonitorType" Accessibility="Internal">
         <MonitorTypeStates>
           <MonitorTypeState ID="GoodCondition" NoDetection="false" />
           <MonitorTypeState ID="BadCondition" NoDetection="false" />
@@ -504,7 +505,7 @@ $ScriptTime = ($EndTime - $StartTime).TotalSeconds
         </OverrideableParameters>
         <MonitorImplementation>
           <MemberModules>
-            <DataSource ID="DS" TypeID="Netapp.Volume.Monitor.DS">
+            <DataSource ID="DS" TypeID="Netapp.Volume.FilesUsed.Monitor.DS">
               <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
               <SyncTime>$Config/SyncTime$</SyncTime>
               <KeyV>$Config/KeyV$</KeyV>
@@ -1205,8 +1206,8 @@ $discoveryData
           <IntervalSeconds>3600</IntervalSeconds>
           <SyncTime></SyncTime>
           <KeyV>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/KeyV$</KeyV>
-          <PercentError>90</PercentError>
-          <PercentWarn>85</PercentWarn>
+          <PercentError>95</PercentError>
+          <PercentWarn>90</PercentWarn>
           <!-- Just an example of some string data to pass into the script -->
           <!-- <ComputerName>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/NetworkName$</ComputerName> -->
           <ComputerName>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/VolumeName$</ComputerName>
@@ -1215,9 +1216,9 @@ $discoveryData
           <!-- This is the number of consecutive matches that must be met before the monitor will change state.  Also a good example of passing in Integer data. -->
         </Configuration>
       </UnitMonitor>
-      <UnitMonitor ID="Netapp.Volume.Monitor.Two.State" Accessibility="Public" Enabled="false" Target="Windows.Computer.Netapp.Volume" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Netapp.Volume.Monitor.MonitorType" ConfirmDelivery="true">
+      <UnitMonitor ID="Netapp.Volume.FilesUsed.Monitor.Two.State" Accessibility="Public" Enabled="true" Target="Windows.Computer.Netapp.Volume" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Netapp.Volume.FilesUsed.Monitor.MonitorType" ConfirmDelivery="true">
         <Category>AvailabilityHealth</Category>
-        <AlertSettings AlertMessage="Netapp.Volume.Monitor.Two.State.AlertMessage">
+        <AlertSettings AlertMessage="Netapp.Volume.FilesUsed.Monitor.Two.State.AlertMessage">
           <AlertOnState>Warning</AlertOnState>
           <!-- Warning or Error should match OperationalStates below  -->
           <AutoResolve>true</AutoResolve>
@@ -1227,8 +1228,9 @@ $discoveryData
           <AlertParameters>
             <AlertParameter1>$Data/Context/Property[@Name='Result']$</AlertParameter1>
             <AlertParameter2>$Data/Context/Property[@Name='Volume']$</AlertParameter2>
-            <AlertParameter3>$Data/Context/Property[@Name='FreeSpace']$</AlertParameter3>
-            <AlertParameter4>$Data/Context/Property[@Name='UsedPct']$</AlertParameter4>
+            <AlertParameter3>$Data/Context/Property[@Name='FilesTotal']$</AlertParameter3>
+            <AlertParameter4>$Data/Context/Property[@Name='FilesUsed']$</AlertParameter4>
+            <AlertParameter5>$Data/Context/Property[@Name='FilesUsedPercent']$</AlertParameter5>
             <!-- This is an example of passing property output from the script into the alert description -->
           </AlertParameters>
         </AlertSettings>
@@ -1238,7 +1240,7 @@ $discoveryData
           <!-- HealthState = Warning or Error -->
         </OperationalStates>
         <Configuration>
-          <IntervalSeconds>600</IntervalSeconds>
+          <IntervalSeconds>3600</IntervalSeconds>
           <SyncTime></SyncTime>
           <KeyV>$Target/Property[Type="Windows.Computer.Netapp.Volume"]/KeyV$</KeyV>
           <PercentWarn>80</PercentWarn>
@@ -1583,7 +1585,7 @@ $discoveryData
       <StringResource ID="Windows.Computer.Netapp.Monitor.Netapp.Controller.AlertMessage" />
       <StringResource ID="Windows.Computer.Netapp.Monitor.Netapp.Computer.AlertMessage" />
       <StringResource ID="Netapp.Volume.Monitor.AlertMessage" />
-      <StringResource ID="Netapp.Volume.Monitor.Two.State.AlertMessage" />
+      <StringResource ID="Netapp.Volume.FilesUsed.Monitor.Two.State.AlertMessage" />
     </StringResources>
   </Presentation>
   <LanguagePacks>
@@ -1644,24 +1646,25 @@ $discoveryData
               Used Percent: {3}
             </Description>
         </DisplayString>
-        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State">
-          <Name>Netapp Volume Monitor</Name>
+        <DisplayString ElementID="Netapp.Volume.FilesUsed.Monitor.Two.State">
+          <Name>Netapp Volume Files Used Monitor</Name>
           <Description>Powershell 2 state monitor</Description>
         </DisplayString>
-        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State" SubElementID="GoodCondition">
+        <DisplayString ElementID="Netapp.Volume.FilesUsed.Monitor.Two.State" SubElementID="GoodCondition">
           <Name>Good Condition</Name>
         </DisplayString>
-        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State" SubElementID="BadCondition">
+        <DisplayString ElementID="Netapp.Volume.FilesUsed.Monitor.Two.State" SubElementID="BadCondition">
           <Name>Bad Condition</Name>
         </DisplayString>
-        <DisplayString ElementID="Netapp.Volume.Monitor.Two.State.AlertMessage">
-          <Name>Netapp Volume Monitor: Failure</Name>
+        <DisplayString ElementID="Netapp.Volume.FilesUsed.Monitor.Two.State.AlertMessage">
+          <Name>Netapp Volume Files Used Monitor: Failure</Name>
           <Description>
-              Netapp Volume Monitor: detected a bad condition
+              Netapp Volume Files Used Monitor: detected a bad condition
               Result: {0}
               Volume: {1}
-              Free Space: {2}
-              Used Percent: {3}
+              Total Files: {2}
+              Used Files: {3}
+              Used Files Percent: {4}
             </Description>
         </DisplayString>
         <DisplayString ElementID="Windows.Computer.Netapp">
@@ -1677,8 +1680,8 @@ $discoveryData
           <Description>View the proxy server</Description>
         </DisplayString>
         <DisplayString ElementID="Windows.Computer.Netapp.View.State.Netapp.Controller">
-          <Name>View Netapp Controller</Name>
-          <Description>View netapp controllers</Description>
+          <Name>View Netapp Clusters</Name>
+          <Description>View Netapp Clusters</Description>
         </DisplayString>
         <DisplayString ElementID="Windows.Computer.Netapp.View.State.Netapp.Volumes">
           <Name>View Netapp Volumes</Name>

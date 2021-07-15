@@ -1,7 +1,7 @@
 <TemplateGroup>
   <Instances>
     <Instance ID="Instance1cb8bbbf42bb4bd8ba0ce5a2d4aaa2da" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
-      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <MonitorType>Windows!Microsoft.Windows.WmiBased.Performance.ConsecutiveSamplesThreshold</MonitorType>
         <MonitorConfig>&lt;NameSpace&gt;root\cimv2&lt;/NameSpace&gt;&lt;Query&gt;SELECT * FROM Win32_PingStatus WHERE Address='$Target/Property[Type="Windows.Computer.Netapp.Controller"]/ComputerName$'&lt;/Query&gt;&lt;Frequency&gt;300&lt;/Frequency&gt;&lt;ObjectName&gt;tcpPingCheck&lt;/ObjectName&gt;&lt;CounterName&gt;PingCheckResponse&lt;/CounterName&gt;&lt;InstanceName /&gt;&lt;Value&gt;$Data/Property[@Name='StatusCode']$&lt;/Value&gt;&lt;Threshold&gt;0&lt;/Threshold&gt;&lt;Direction&gt;greater&lt;/Direction&gt;&lt;NumSamples&gt;4&lt;/NumSamples&gt;</MonitorConfig>
         <MonitorOperationalStates>
@@ -38,7 +38,7 @@
       </UnitMonitorConfig>
     </Instance>
     <Instance ID="Instancee3d9f05f1cbf48eaae943b2ef83f8584" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
-      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <MonitorType>Windows!Microsoft.Windows.WmiBased.Performance.ConsecutiveSamplesThreshold</MonitorType>
         <MonitorConfig>&lt;NameSpace&gt;root\cimv2&lt;/NameSpace&gt;&lt;Query&gt;SELECT * FROM Win32_PingStatus WHERE Address='$Target/Property[Type="Windows.Computer.Netapp.Computer"]/NodeName$'&lt;/Query&gt;&lt;Frequency&gt;300&lt;/Frequency&gt;&lt;ObjectName&gt;tcpPingCheck&lt;/ObjectName&gt;&lt;CounterName&gt;PingCheckResponse&lt;/CounterName&gt;&lt;InstanceName /&gt;&lt;Value&gt;$Data/Property[@Name='StatusCode']$&lt;/Value&gt;&lt;Threshold&gt;0&lt;/Threshold&gt;&lt;Direction&gt;greater&lt;/Direction&gt;&lt;NumSamples&gt;4&lt;/NumSamples&gt;</MonitorConfig>
         <MonitorOperationalStates>

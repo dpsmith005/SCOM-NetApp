@@ -56,10 +56,10 @@
       <SubType>Code</SubType>
       <DependentUpon>Health Model\Monitors.mptg</DependentUpon>
     </Compile>
-    <Compile Include="Health Model\MonitorThreeStateModule.mpx">
+    <Compile Include="Health Model\NetAppVolumeMonitorThreeStateModule.mpx">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Health Model\Netapp.Volume.Monitor.Two.State.mpx">
+    <Compile Include="Health Model\Netapp.Volume.FilesUsed.Monitor.Two.State.mpx">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ManagementPack.mpx">
@@ -102,8 +102,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Health Model\NetAppMonitorThreeState.ps1" />
-    <EmbeddedResource Include="Health Model\Netapp.Volume.Monitor.Two.State.ps1" />
+    <EmbeddedResource Include="Health Model\NetAppVolumeMonitorThreeState.ps1" />
+    <EmbeddedResource Include="Health Model\Netapp.Volume.FilesUsed.Monitor.Two.State.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\DiscoverNetAppControllerRelationship.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\DiscoverNetAppControllers.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\DiscoverNetAppVolumeRelationships.ps1" />
