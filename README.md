@@ -7,4 +7,4 @@ The initial discovery is based on a registry value on a SCOM management server. 
 
 There are only a few basic steps to get this working.  First import the management pack into SCOM.  Then add a registry entry at HKLM\SOFTWARE\WSH\NetApp\Controllers.  Controllers should be a string with a comma separated list of the Netapp cluster names.  Then let the magic begin.
 
-The management pack can be downloaded here in the bin\release folder.
+The management pack can be downloaded here in the bin\release folder.  https://github.com/dpsmith005/SCOM-NetApp/tree/main/Windows.Computer.Netapp/bin/Release
